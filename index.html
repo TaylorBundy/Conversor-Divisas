@@ -6,21 +6,82 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>Conversor de Divisas</title>
+    <script defer src="script.js"></script>
 </head>
 <body>
-    <div>
-        <p>Ingrese Divisa Base: </p>
-        <input type="text">        
-        
+    <div class="RadioContainer">
+        <div class="RadioClass">
+            <div class="Radios">
+                <label class="labels">
+                    <!-- <input type="radio" name="radios" id="ff" value="Fast Forex" onclick="check()"> -->
+                    <input type="radio" class="radio" name="radios" id="ff" value="Fast Forex" checked="checked" />
+                    <!-- <label for="FastForex" class="labels">Fast Forex</label> -->
+                    Fast Forex
+                </label>
+            </div>
+            <!-- <div class="Radios">
+                <input type="radio" name="FastForex" id="ff" value="Fast Forex">
+                <label for="FastForex" class="labels">Fast Forex</label>
+            </div> -->
+            <div class="Radios">
+                <label class="labels">
+                    <input type="radio" class="radio" name="radios" id="ca1" value="Currency API" />
+                    <!-- <label for="CurrencyAPI1" class="labels">Currency API</label> -->
+                    Currency API
+                </label>
+            </div>
+            <div class="Radios">
+                <label class="labels">
+                    <input type="radio" class="radio" name="radios" id="ca2" value="Currency API-2" />
+                    <!-- <label for="CurrencyAPI2" class="labels">Currency API-2</label> -->
+                    Currency API-2
+                </label>
+            </div>
+            <div class="Radios">
+                <label class="labels">
+                    <input type="radio" class="radio" name="radios" id="av" value="API Verve" />
+                    <!-- <label for="APIVerve" class="labels">API Verve</label> -->
+                    API Verve
+                </label>
+            </div>
+        </div>
     </div>
-    <div>
-        <p>Ingrese Divisa a Convertir: </p>
-        <input type="text">
-        
+    <div class="InputContainer">
+        <div class="ApiClass">            
+            <div class="Inputs2">
+                <p>Ingrese API KEY: </p>
+                <input type="text" class="text2" />
+            </div>
+        </div>
+        <div class="InputsClass">
+            <div class="Inputs">                
+                <p>Ingrese Divisa Base: </p>
+                <input type="text" class="text">                
+            </div>
+            <div class="Inputs">            
+                <p>Ingrese Divisa a Convertir: </p>
+                <input type="text" class="text">            
+            </div>
+            <div class="Inputs">                
+                <p>Ingrese Cantidad: </p>
+                <input type="text" class="text">                
+            </div>
+        </div>
     </div>
-    <div>
-        <p>Ingrese Cantidad: </p>
-        <input type="text">
+    <div class="ButtonContainer">
+        <div class="BotonClass">
+            <div class="botones">
+                <!-- <button class="Convertir"> -->
+                <button>
+                    <span>Convertir</span>
+                </button>
+            </div>
+            <div class="botones">
+                <button class="Limpiar">
+                    <span>Limpiar</span>
+                </button>
+            </div>
+        </div>
     </div>
 </body>
 </html>
