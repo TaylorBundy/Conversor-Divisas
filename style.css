@@ -1,6 +1,8 @@
 body {
     height: 100%;
     width: 100%;
+    background-color: #170526;
+    position: relative;
 }
 
 input {
@@ -9,6 +11,8 @@ input {
     border: 1px solid #999797;
     border-radius: 5px;
     padding: 10px 20px;
+    position: relative;
+    width: 200px;
 }
 
 input:is(:focus) {
@@ -17,4 +21,30 @@ input:is(:focus) {
     background: linear-gradient(#121125, #121125)
     padding-box,
     linear-gradient(45deg, blue, red) border-box;
-} 
+}
+
+input:hover {
+    border: 2px solid transparent;
+    transition: all 0.1s ease;
+    background: linear-gradient(#121125, #121125)
+    padding-box,
+    linear-gradient(45deg, blue, red) border-box;
+}
+
+p {
+    color: #fff;
+    border: 1px solid #999797;
+    border-radius: 5px;
+    width: 200px;
+    position: relative;
+    padding: 10px 20px;
+    text-align: left;
+}
+
+/* span {
+    color: #fff;
+    padding: 10px 20px 10px 20px;
+    border: 1px solid #999797;
+    border-radius: 5px;
+    position: absolute;
+} */
