@@ -476,6 +476,7 @@ p {
 
     .labels {
         font-size: 10px;
+        font-weight: normal;
     }
 
     label:has(input[type="radio"]:checked) {
