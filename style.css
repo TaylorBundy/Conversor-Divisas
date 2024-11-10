@@ -427,4 +427,8 @@ p {
     .RadioClass {
         display: grid;
     }
+
+    .labels {
+        font-size: 10px;
+    }
 }

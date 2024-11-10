@@ -1,0 +1,250 @@
+body {
+    height: 100%;
+    width: 100%;
+    background-color: #170526;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    display: block;
+}
+
+.RadioContainer {
+    border: 1px solid blue;
+    border-radius: 5px;
+    width: 60%;
+    height: 50%;
+    padding: 20px 20px 20px 20px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    justify-content: center;
+    align-items: center;
+    position: sticky;
+    display: flex;
+}
+
+.RadioClass {
+    box-sizing: content-box;
+    cursor: pointer;
+}
+
+.Radios {
+    color: white;
+    border: 2px solid blue;
+    background-image: linear-gradient(150deg, #9500ff, #09f, #00ddff);
+    border-radius: 5px;
+    padding: 5px;
+    margin: 0px;
+    position: relative;
+    display: inline-flex;
+    width: 170px;
+    cursor: pointer;
+}
+
+.Radios:hover label{
+    border: 0px solid transparent;
+    transition: all 0.1s ease;
+    background-image: linear-gradient(150deg, #00ddff, #09f, #9500ff);
+}
+
+.labels {
+    color: white;
+    border-radius: 5px;
+    padding: 10px;
+    width: 100%;
+    font-weight: bold;
+    font-family: Verdana;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+label:has(input[type="radio"]:checked) {
+    background: none;
+    background-image: linear-gradient(150deg, #9500ff, #09f, #00ddff);
+    border: 0px solid transparent;
+    font-size: 14px;
+    transition: all 0.1s ease;
+    background: linear-gradient(#121125, #121125) padding-box, linear-gradient(45deg, blue, red) border-box;
+}
+
+.radio {
+    padding: 0px;
+    display: inline-flex;
+    border: 0;
+    cursor: pointer;
+}
+
+.InputsClass {
+    border: 1px solid blue;
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.ApiClass {
+    border: 1px solid blue;
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    box-sizing: content-box;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    align-items: center;
+    position: sticky;
+    display: flex;
+}
+
+.Inputs2 {
+    position: relative;
+    display: inline-flex;
+    padding: 5px 0px 5px 0px;
+}
+
+.Inputs2 p {
+    margin: 5px;
+}
+
+.InputContainer{
+    border: 1px solid blue;
+    border-radius: 5px;
+    width: 60%;
+    height: 50%;
+    padding: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    justify-content: center;
+    align-items: center;
+    box-sizing: content-box;
+}
+
+.text {
+    all: unset;
+    color: #fff;
+    border: 1px solid blue;
+    border-radius: 5px;
+    padding: 10px 10px;
+    width: 200px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    box-sizing: content-box;
+}
+
+.text2 {
+    all: unset;
+    color: #fff;
+    border: 1px solid blue;
+    border-radius: 5px;
+    padding: 10px 10px;
+    width: 200px;
+    display: block;
+    margin: 5px;
+    box-sizing: content-box;
+}
+
+.text:is(:focus){
+    border: 2px solid transparent;
+    transition: all 0.1s ease;
+    background: linear-gradient(#121125, #121125)
+    padding-box,
+    linear-gradient(45deg, blue, red) border-box;
+    transform: scale(1.1);
+}
+
+.text:hover{
+    border: 2px solid transparent;
+    transition: all 0.1s ease;
+    background: linear-gradient(#121125, #121125)
+    padding-box,
+    linear-gradient(45deg, blue, red) border-box;
+}
+
+.text2:hover{
+    border: 1px solid transparent;
+    transition: all 0.1s ease;
+    background: linear-gradient(#121125, #121125)
+    padding-box,
+    linear-gradient(45deg, blue, red) border-box;
+}
+
+.ButtonContainer {
+    border: 1px solid blue;
+    border-radius: 5px;
+    width: 60%;
+    height: 50%;
+    padding: 20px 20px 20px 20px;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    position: sticky;
+    display: flex;
+}
+
+.BotonClass {
+    box-sizing: content-box;
+}
+
+.botones {
+    position: relative;
+    display: inline-flex;
+    padding: 5px 0px 5px 0px;
+}
+
+button {
+    border-radius: 5px;
+    color: white;
+    padding: 6px;
+    width: 150px;
+    background-image: linear-gradient(150deg, #9500ff, #09f, #00ddff);
+    cursor: pointer;
+    transition: .3s;
+    border: 0;
+    display: flex;
+}
+
+button span {
+    border-radius: 5px;
+    transition: .3s;
+    padding: 10px 20px;
+    width: 100%;
+    font-size: 14px;
+    font-weight: bold;
+    font-family: Verdana;
+}
+
+button:hover span {
+    background: none;
+    background-color: #111;
+}
+
+button:active {
+    transform: scale(0.9);
+}
+
+p {
+    color: #fff;
+    border: 1px solid blue;
+    border-radius: 5px;
+    width: 200px;
+    padding: 10px 10px;
+    top: 0px;
+    text-align: left;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-family: Verdana;
+    font-size: 13px;
+}
