@@ -424,11 +424,28 @@ p {
         opacity: 1;
     }
 
+    .RadioContainer {
+        width: 70%;
+    }
+
     .RadioClass {
-        display: grid;
+        /* display: grid; */
+        display: inline-flex;
     }
 
     .labels {
         font-size: 10px;
+    }
+
+    .InputContainer {
+        width: 70%;
+    }
+
+    .InputContainer2 {
+        width: 70%;
+    }
+
+    .ButtonContainer {
+        width: 70%;
     }
 }
