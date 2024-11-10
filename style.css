@@ -8,6 +8,18 @@ body {
     display: block;
 }
 
+.MainContainer {
+    border: 1px solid blue;
+    transition: opacity 0.8s ease;
+    width: 100%;
+    height: 100%;
+}
+
+.MainContainer:hover > :not(:hover) {
+    filter: blur(0.1px);
+    opacity: 0.4;
+}
+
 .RadioContainer {
     border: 1px solid blue;
     border-radius: 5px;
@@ -21,12 +33,18 @@ body {
     justify-content: center;
     align-items: center;
     position: sticky;
+    /* position: fixed; */
     display: flex;
+    /* transition: opacity 0.8s ease; */
 }
+
+/* .RadioContainer:hover > :not(:hover) {    
+    opacity: 0.4;
+} */
 
 .RadioClass {
     box-sizing: content-box;
-    cursor: pointer;
+    cursor: pointer;    
 }
 
 .Radios {
@@ -37,6 +55,7 @@ body {
     padding: 5px;
     margin: 0px;
     position: relative;
+    /* position: fixed; */
     display: inline-flex;
     width: 170px;
     cursor: pointer;
@@ -75,39 +94,6 @@ label:has(input[type="radio"]:checked) {
     cursor: pointer;
 }
 
-.InputsClass {
-    border: 1px solid blue;
-    border-radius: 5px;
-    padding: 10px;
-    margin-top: 5px;
-    margin-bottom: 5px;
-}
-
-.ApiClass {
-    border: 1px solid blue;
-    border-radius: 5px;
-    padding: 10px;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    box-sizing: content-box;
-    margin-left: auto;
-    margin-right: auto;
-    justify-content: center;
-    align-items: center;
-    position: sticky;
-    display: flex;
-}
-
-.Inputs2 {
-    position: relative;
-    display: inline-flex;
-    padding: 5px 0px 5px 0px;
-}
-
-.Inputs2 p {
-    margin: 5px;
-}
-
 .InputContainer{
     border: 1px solid blue;
     border-radius: 5px;
@@ -118,9 +104,40 @@ label:has(input[type="radio"]:checked) {
     margin-right: auto;
     margin-top: 5px;
     margin-bottom: 5px;
-    justify-content: center;
-    align-items: center;
-    box-sizing: content-box;
+    /* transition: opacity 0.8s ease; */
+    /* justify-content: center; */
+    /* align-items: center; */
+    /* box-sizing: content-box; */
+    /* display: flex; */
+}
+
+/* .InputContainer:hover > :not(:hover) {
+    opacity: 0.4;
+} */
+
+.InputsClass {
+    border: 1px solid blue;
+    border-radius: 5px;
+    /* padding: 10px; */
+    /* margin-top: 5px; */
+    /* margin-bottom: 5px; */
+    /* display: flex; */
+    /* align-items: center; */
+    display: grid;
+    /* place-items: center; */
+    flex-grow: 0;
+}
+
+.Inputs {
+    padding: 5px 0px 5px 0px;
+    flex-grow: 0;
+    /* align-items: center; */
+    display: inline-flex;
+}
+
+.P {
+    flex-grow: 0;
+    width: 35%;
 }
 
 .text {
@@ -129,25 +146,17 @@ label:has(input[type="radio"]:checked) {
     border: 1px solid blue;
     border-radius: 5px;
     padding: 10px 10px;
-    width: 200px;
-    display: block;
-    margin-left: auto;
+    /* width: 200px; */
+    width: 80%;
+    /* display: block; */
+    /* margin-left: auto;
     margin-right: auto;
     margin-top: 5px;
-    margin-bottom: 5px;
-    box-sizing: content-box;
-}
-
-.text2 {
-    all: unset;
-    color: #fff;
-    border: 1px solid blue;
-    border-radius: 5px;
-    padding: 10px 10px;
-    width: 200px;
-    display: block;
+    margin-bottom: 5px; */
     margin: 5px;
-    box-sizing: content-box;
+    /* box-sizing: content-box; */
+    cursor: text;
+    flex-grow: 0;
 }
 
 .text:is(:focus){
@@ -167,6 +176,75 @@ label:has(input[type="radio"]:checked) {
     linear-gradient(45deg, blue, red) border-box;
 }
 
+.InputContainer2{
+    /* background-image: linear-gradient(150deg, #9500ff, #09f, #00ddff); */
+    /* transition: opacity 0.8s ease; */
+    border: 1px solid blue;
+    border-radius: 5px;
+    width: 60%;
+    height: 50%;
+    padding: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    /* opacity: 0.4; */
+    /* justify-content: center; */
+    /* align-items: center; */
+    /* box-sizing: content-box; */
+}
+
+/* .InputContainer2:hover > :not(:hover){
+    opacity: 0.4;
+} */
+
+.ApiClass {
+    border: 1px solid blue;
+    border-radius: 5px;
+    /* padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    box-sizing: content-box;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    align-items: center;
+    position: sticky; */
+    display: grid;
+    flex-grow: 0;
+}
+
+.Inputs2 {
+    /* position: relative; */
+    /* display: inline-flex; */
+    padding: 5px 0px 5px 0px;
+    flex-grow: 0;
+    display: inline-flex;
+}
+
+.Inputs2 p {
+    margin: 5px;
+}
+
+.P1 {
+    flex-grow: 0;
+    width: 35%;
+}
+
+.text2 {
+    all: unset;
+    color: #fff;
+    border: 1px solid blue;
+    border-radius: 5px;
+    padding: 10px 10px;
+    /* width: 200px; */
+    width: 80%;
+    /* display: block; */
+    margin: 5px;
+    /* box-sizing: content-box; */
+    /* flex-grow: 1; */
+}
+
 .text2:hover{
     border: 1px solid transparent;
     transition: all 0.1s ease;
@@ -180,37 +258,80 @@ label:has(input[type="radio"]:checked) {
     border-radius: 5px;
     width: 60%;
     height: 50%;
-    padding: 20px 20px 20px 20px;
-    justify-content: center;
-    align-items: center;
+    /* padding: 20px 20px 20px 20px; */
+    padding: 20px;
+    /* justify-content: center; */
+    /* align-items: center; */
     margin-left: auto;
     margin-right: auto;
     margin-top: 5px;
     margin-bottom: 5px;
-    position: sticky;
-    display: flex;
+    /* position: sticky; */
+    /* display: flex; */
+    /* place-items: center; */
+    
 }
 
 .BotonClass {
-    box-sizing: content-box;
+    /* box-sizing: content-box; */
+    /* display: flex; */
+    flex-grow: 0;
+    border: 1px solid blue;
+    border-radius: 5px;
+    display: flex;
+    /* place-items: center; */
+    /* justify-content: space-between; */
+    /* justify-content: center; */
 }
 
-.botones {
-    position: relative;
+.botones0 {
+    /* position: relative; */
     display: inline-flex;
     padding: 5px 0px 5px 0px;
+    flex-grow: 0;
+    width: 35%;
+    /* align-items: center; */    
+}
+
+.btnvacio {
+    /* width: 35%; */
+    flex-grow: 1;
+}
+
+.botones1 {
+    /* position: relative; */
+    display: inline-flex;
+    padding: 5px 0px 5px 0px;
+    flex-grow: 0;
+    width: 150px;
+    /* width: 100px; */
+    /* align-items: center; */    
+}
+
+.Convertir {
+    flex-grow: 1;
+    /* width: 110px; */
+}
+
+.Limpiar {
+    flex-grow: 1;
+    /* width: 110px; */
 }
 
 button {
     border-radius: 5px;
     color: white;
     padding: 6px;
-    width: 150px;
+    /* width: 150px; */
     background-image: linear-gradient(150deg, #9500ff, #09f, #00ddff);
     cursor: pointer;
     transition: .3s;
     border: 0;
     display: flex;
+    /* display: inline-flex; */
+    /* flex-grow: 1; */
+    margin: 5px;
+    /* width: 100%; */
 }
 
 button span {
@@ -221,6 +342,7 @@ button span {
     font-size: 14px;
     font-weight: bold;
     font-family: Verdana;
+    /* flex-grow: 1; */
 }
 
 button:hover span {
@@ -236,15 +358,25 @@ p {
     color: #fff;
     border: 1px solid blue;
     border-radius: 5px;
-    width: 200px;
+    /* width: 200px; */
+    /* width: 25%; */
     padding: 10px 10px;
     top: 0px;
     text-align: left;
-    margin-left: auto;
+    /* margin-left: auto;
     margin-right: auto;
     margin-top: 5px;
-    margin-bottom: 5px;
+    margin-bottom: 5px; */
+    margin: 5px;
     font-weight: bold;
     font-family: Verdana;
     font-size: 13px;
+    /* flex-grow: 0; */
+}
+
+@media(max-width:991px) {
+    body {
+        /* padding: 100px; */
+        width: 100%;
+    }
 }
