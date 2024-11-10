@@ -478,6 +478,10 @@ p {
         font-size: 10px;
     }
 
+    label:has(input[type="radio"]:checked) {
+        font-size: 10px;
+    }
+
     .InputContainer {
         width: 70%;
     }
