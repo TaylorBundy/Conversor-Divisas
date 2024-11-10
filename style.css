@@ -413,3 +413,14 @@ p {
         width: 100%;
     }
 }
+
+@media only screen and (max-width: 600px) {
+    body {
+        width: 100%;
+    }
+
+    .MainContainer:hover > :not(:hover) {
+        filter: blur(0px);
+        opacity: 1;
+    }
+}
