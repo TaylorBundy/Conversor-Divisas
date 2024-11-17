@@ -219,7 +219,7 @@ label:has(input[type="radio"]:checked) {
     border-radius: 5px;
     padding: 10px 10px;
     /* width: 200px; */
-    width: 100%;
+    width: 80%;
     /* display: block; */
     /* margin-left: auto;
     margin-right: auto;
@@ -298,21 +298,10 @@ label:has(input[type="radio"]:checked) {
     padding: 5px 0px 5px 0px;
     flex-grow: 0;
     display: inline-flex;    
-    border: 0px solid blue;
 }
 
 .Inputs2 p {
-    /* margin: 0px 5px 0px 5px; */
     margin: 5px;
-}
-
-#Label {
-    /* padding: 5px 0px 5px 0px; */
-    padding: 5px 0px 0px 0px;
-}
-
-#Api {
-    padding: 0px 0px 5px 0px;
 }
 
 .P1 {
@@ -332,72 +321,20 @@ label:has(input[type="radio"]:checked) {
     border-radius: 5px;
     padding: 10px 10px;
     /* width: 200px; */
-    width: 100%;
+    width: 80%;
     /* display: block; */
     margin: 5px;
     /* box-sizing: content-box; */
     /* flex-grow: 1; */
 }
 
-.text2:hover {
+.text2:hover{
     border: 1px solid transparent;
     transition: all 0.1s ease;
     background: linear-gradient(#121125, #121125)
     padding-box,
     linear-gradient(45deg, blue, red) border-box;
     color: #fff;
-}
-
-/* Tooltip container */
-.tooltip {
-    position: relative;
-    display: inline-flex;
-    /* border-bottom: 0px dotted black; If you want dots under the hoverable text */
-    width: 80%;
-    /* box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
-    -moz-box-shadow:0 0 10px #000;
-    -webkit-box-shadow:0 0 10px #000; */
-  }
-  
-/* Tooltip text */
-.tooltip .tooltiptext {
-    visibility: hidden;
-    width: 80%;
-    background-color: #555;
-    color: #fff;
-    text-align: center;
-    padding: 5px 0;
-    border-radius: 6px;
-  
-    /* Position the tooltip text */
-    position: absolute;
-    /* z-index: 1; */
-    /* bottom: 125%; */
-    bottom: -50%;
-    left: 50%;
-    margin-left: -60px;
-  
-    /* Fade in tooltip */
-    opacity: 0;
-    transition: opacity 0.3s;
-}
-  
-/* Tooltip arrow */
-.tooltip .tooltiptext::after {
-    content: "";
-    /* position: absolute; */
-    top: 100%;
-    left: 50%;
-    margin-left: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: #555 transparent transparent transparent;
-}
-  
-/* Show the tooltip text when you mouse over the tooltip container */
-.tooltip:hover .tooltiptext {
-    visibility: visible;
-    opacity: 0;
 }
 
 .text3 {    
@@ -413,7 +350,7 @@ label:has(input[type="radio"]:checked) {
     border-radius: 5px;
     padding: 10px 10px;
     /* width: 200px; */
-    width: 100%;
+    width: 80%;
     /* display: block; */
     /* margin-left: auto;
     margin-right: auto;
@@ -443,17 +380,6 @@ label:has(input[type="radio"]:checked) {
     linear-gradient(45deg, blue, red) border-box;
     color: #fff;
     /* transform: scale(1); */
-}
-
-.P2 {
-    flex-grow: 1;
-    width: 30%;    
-    background-color: #170526;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);  
-    text-align: center;  
-    font-size: 14px;
-    /* margin-top: 0;
-    margin-bottom: 0; */
 }
 
 .ButtonContainer {
