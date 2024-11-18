@@ -1,3 +1,10 @@
+// const { Ini } = require("./ini")
+//import { Ini } from './ini';
+//const { readIniFile } = require('read-ini-file');
+//const path = require('path');
+
+//var parser = require('ini-parser')
+
 //creamos lista de simbolos monedas
 const simbolos= {
     "USD" : "U$D ",
@@ -25,6 +32,11 @@ var TitulosList = [
   divconv = "Ingrese la Divisa a Convertir!",
   divcant = "Ingrese la Cantidad a Convertir!"
 ]
+
+//definimos variable de select
+const sel = document.getElementById("lang");
+const opt = document.createElement("option");
+
 
 //definimos variables de los radiobuttons
 let ff1 = document.getElementById("ff1")
@@ -203,6 +215,10 @@ function Titulos() {
 //definimos funcion fastforex
 async function Convertir() {
   apikey = divApi.value
+  try {
+    divRes.value = 'Calculando'
+  }
+  finally {
   if (ff.checked) {
     url = "https://api.fastforex.io/fetch-one?from="
     url1 = "&api_key=" + apikey
@@ -243,7 +259,7 @@ async function Convertir() {
       const datos1 = await datos[div]
       const divisas = await datos1["value"]
       divRes.value = simbolo + divisas
-      //console.log(divisas)      
+      //console.log(divisas)
     }
     catch{
       print("Ha ocurrido un error")
@@ -276,8 +292,265 @@ async function Convertir() {
     catch {
       print("Ha ocurrido un error")
     }
-  }    
+  }
+  }
 }
+
+// window = new BrowserWindow({
+//   webPreferences: {
+//       nodeIntegration: true,
+//       contextIsolation: false
+//   }
+// });
+
+function leerArchivo(e) {
+  var archivo = e.target.files[0];
+  if (!archivo) {
+    return;
+  }
+  var lector = new FileReader();
+  lector.onload = function(e) {
+    var contenido = e.target.result;
+    //var conte = e.target;
+    //console.log(contenido)
+    lector.onloadend = () => leyendo(contenido);
+    //return contenido
+    //mostrarContenido(contenido);
+  };
+  lector.readAsText(archivo);
+}
+
+function mostrarContenido(contenido) {
+  var elemento = document.getElementById('contenido-archivo');
+  elemento.innerHTML = contenido;
+}
+
+document.getElementById('file-input')
+  .addEventListener('change', leerArchivo, false);
+
+function parseINIString(data){
+  var regex = {
+      section: /^\s*\[\s*([^\]]*)\s*\]\s*$/,
+      param: /^\s*([^=]+?)\s*=\s*(.*?)\s*$/,
+      comment: /^\s*;.*$/
+  };
+  var value = {};
+  var lines = data.split(/[\r\n]+/);
+  var section = null;
+  lines.forEach(function(line){
+      if(regex.comment.test(line)){
+          return;
+      }else if(regex.param.test(line)){
+          var match = line.match(regex.param);
+          if(section){
+              value[section][match[1]] = match[2];
+          }else{
+              value[match[1]] = match[2];
+          }
+      }else if(regex.section.test(line)){
+          var match = line.match(regex.section);
+          value[match[1]] = {};
+          section = match[1];
+      }else if(line.length == 0 && section){
+          section = null;
+      };
+  });
+  //console.log(value);
+  return value;
+}
+
+function parseINIString2(data){
+  var regex = {
+      section: /^\s*\[\s*([^\]]*)\s*\]\s*$/,
+      param: /^\s*([\w\.\-\_]+)\s*=\s*(.*?)\s*$/,
+      comment: /^\s*;.*$/
+  };
+  var value = {};
+  var lines = data.split(/\r\n|\r|\n/);
+  var section = null;
+
+  for(x=0;x<lines.length;x++)
+  {
+
+      if(regex.comment.test(lines[x])){
+          return;
+      }else if(regex.param.test(lines[x])){
+          var match = lines[x].match(regex.param);
+          if(section){
+              value[section][match[1]] = match[2];
+          }else{
+              value[match[1]] = match[2];
+          }
+      }else if(regex.section.test(lines[x])){
+          var match = lines[x].match(regex.section);
+          value[match[1]] = {};
+          section = match[1];
+      }else if(lines.length == 0 && section){//changed line to lines to fix bug.
+          section = null;
+      };
+
+  }
+
+  return value;
+  }
+
+function parseINI(data) {
+  let rgx = {
+    section: /^\s*\[\s*([^\]]*)\s*\]\s*$/,
+    param: /^\s*([^=]+?)\s*=\s*(.*?)\s*$/,
+    comment: /^\s*;.*$/
+  };
+  let result = {};
+  //let lines = data.split(/[\r\n]+/);
+  let lines = data.split(/\r\n|\r|\n/);
+  let section = result;
+  lines.forEach(function (line) {
+    //comments
+    if (rgx.comment.test(line)) return;
+    //params
+    if (rgx.param.test(line)) {
+      let match = line.match(rgx.param);
+      section[match[1]] = match[2];
+      return;
+    }
+    //sections
+    if (rgx.section.test(line)) {
+      section = result
+      let match = line.match(rgx.section);
+      for (let subSection of match[1].split(".")) {
+        !section[subSection] && (section[subSection] = {});
+        section = section[subSection];        
+      }
+      return;
+    }
+  });
+  return result;
+}
+
+function leyendo (contents) {
+  //let lineas = contents.split(/\n/);
+  //let lineas2 = contents.split(/\n/);
+  let lineas2 = contents.split(/[\r\n]+/);
+  //console.log(contents);
+  var cantidad = lineas2.length;
+  //lineas.forEach(line => console.log(line))
+  
+  //var iniObj = parseINIString(contents);
+  var iniObj2 = parseINIString2(contents);
+  //var iniObj3 = parseINI(contents);
+  
+  //var lola = iniObj3;
+  
+  //console.log(lola);
+
+  //var jjj = '[API0]';
+  //if (jjj in iniObj3) {
+    //console.log('si');
+  //}
+  for (x = 0; x < lineas2.length -1; x++){
+    //x = x / 3;
+    //console.log(x);
+    var api = 'API' + x;
+    if (api in iniObj2) {
+      var apis = iniObj2[api];
+      //console.log(iniObj2[api]);
+      //console.log(apis);
+      //if ('API' in apis) {
+        //var Nitems = apis['API'];
+        //var pro = new Array(Nitems);
+        //console.log(apis.length);
+        //opt.value = Nitems;
+        //opt.text = Nitems;
+        //sel.Add(opt);
+        //AddItem(Nitems);
+        //console.log(apis['API']);
+      //}
+    }
+    if ('API' in apis) {
+      var Nitems = apis['API'];
+      var pro = new Array(Nitems);
+      console.log(Nitems);
+      //console.log(pro.length);
+    }
+    //AddItem(Nitems);
+    //console.log(Nitems);
+    //console.log(x);
+    //console.log(pro);
+  }
+  //if (api in iniObj2) {
+    //console.log(iniObj2[api]);
+  //}
+  //console.log(Nitems);
+  //console.log(pro);
+  //if ('API1' in iniObj2) {
+    //console.log('API1');
+  //}
+  //console.log(iniObj2);
+  //console.log(iniObj.API1);
+  //AddItem(Nitems);
+  console.log("cantidad: " + cantidad);
+  //if (iniObj)
+
+  // lineas2.forEach(line2 => {
+  //   iniObj = parseINIString(line2);
+  //   datos = iniObj;
+  //   //console.log(iniObj);
+  //   console.log(datos);
+  //   if (api in datos) {
+  //     datos1 = datos[api];
+  //     console.log(datos1);
+  //   }
+  // });
+  //console.log(datos);
+  //console.log(iniObj.Hello);
+  //console.log(iniObj.Section2);
+  //console.log(iniObj.Section2.Param2);
+  //console.log(iniObj.Section2['Hello Param3']);
+}
+
+//creamos funcion para agregar items a la lista de apis
+function AddItem(items) {
+  //let lineas3 = items.split(/[\r\n]+/);
+  let lineas3 = items.split();
+  //opt.value = "3";
+  opt.value = items
+  opt.text = items;
+  //opt.value = items.length;
+  //opt.text = "Option: Value 3";
+  //opt.text = items;
+  //console.log(items);
+  //console.log(lineas3.length);
+  //sel.add(opt, sel.options[1]);
+  //sel.appendChild(opt);
+  sel.add(new Option(opt));
+  sel.append(opt);
+}
+
+/* function creaArchivo() {
+  var ini = new Ini();
+
+  ini.parse([
+    'prop = value',
+    '[sect]',
+    'foo = bar',
+    'baz = yes',
+    '[sect "label"]',
+    'foo = "bar"',
+    'baz = off'
+  ].join('\n'));
+
+  ini.get('prop')           // value
+  ini.get('sect.foo')       // bar
+  ini.get('sect:label.baz') // false
+
+  ini.toObject()            // {prop: value, sect: { foo: bar, baz: true } ...}
+  ini.toString()            // Generates back the ini file
+
+  // It's also to modify or build an ini file programatically
+  var sect = ini.section('newsect', 'mylabel');
+  sect.comment('My comment');
+  sect.property('foo', 'bar');
+} */
 
 // function prueba(fun) {
 //   var funciones = {};

@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <link rel="shortcut icon" href="Imagenes/favicon.ico">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href='style.css' />
     <title>Conversor de Divisas</title>
 </head>
 <body>
-    <div class="MainContainer">
+    <div class="MainContainer" onkeypress="Javascript: if (event.keyCode==13) Convertir();">
         <div class="RadioContainer">
             <div class="RadioClass">
                 <div class="Radios" id="ff1" onmouseover="Titulos()">
@@ -18,21 +18,46 @@
                 </div>
                 <div class="Radios" id="ca11" onmouseover="Titulos()">
                     <label class="labels" id="ca12" onmouseover="Titulos()">
-                        <input type="radio" class="radio" name="radios" id="ca1" value="Currency API" onclick="SetTitle()" onmouseover="Titulos()" />                        
+                        <input type="radio" class="radio" name="radios" id="ca1" value="Currency API" onclick="SetTitle()" onmouseover="Titulos()" />
                         Currency API
                     </label>
                 </div>
                 <div class="Radios" id="ca21" onmouseover="Titulos()">
                     <label class="labels" id="ca22" onmouseover="Titulos()">
-                        <input type="radio" class="radio" name="radios" id="ca2" value="Currency API-2" onclick="SetTitle()" onmouseover="Titulos()" />                        
+                        <input type="radio" class="radio" name="radios" id="ca2" value="Currency API-2" onclick="SetTitle()" onmouseover="Titulos()" />
                         Currency API-2
                     </label>
                 </div>
                 <div class="Radios" id="av1" onmouseover="Titulos()">
                     <label class="labels" id="av2" onmouseover="Titulos()">
-                        <input type="radio" class="radio" name="radios" id="av" value="API Verve" onclick="SetTitle()" onmouseover="Titulos()" />                        
+                        <input type="radio" class="radio" name="radios" id="av" value="API Verve" onclick="SetTitle()" onmouseover="Titulos()" />
                         API Verve
                     </label>
+                </div>
+            </div>
+        </div>
+        <div class="InputContainer2">
+            <div class="ApiClass">
+                <div class="Inputs2" id="">
+                    <p class="P2" id="">Datos de la API</p>
+                </div>
+                <div class="Inputs2" id="Apis">
+                    <input type="file" name="" id="file-input" class="" onmouseover="Titulos()" />
+                    <pre id="contenido-archivo"></pre>
+                    <form action="#">
+                        <label for="lang">Apis</label>
+                        <select name="lenguajes" id="lang">
+                            <!-- <option value="javascript">JavaScript</option> -->
+                            <!-- <option value="php">PHP</option> -->
+                            <!-- <option value="java">Java</option> -->
+                            <!-- <option value="golang">Golang</option> -->
+                            <!-- <option value="python">Python</option> -->
+                            <!-- <option value="c#">C#</option> -->
+                            <!-- <option value="C++">C++</option> -->
+                            <!-- <option value="erlang">Erlang</option> -->
+                        </select>
+                        <!-- <input type="submit" value="Enviar" onclick="leyendo()" /> -->
+                    </form>
                 </div>
             </div>
         </div>
@@ -69,7 +94,7 @@
                 <div class="Inputs">
                     <p class="P">Cantidad: </p>
                     <div class="tooltip">
-                        <input type="number" name="divCant" id="DivCant" pattern="/^-?\d+\.?\d*$/" class="text3" onKeyPress="if(this.value.length==7) return false;" onfocus="Mayus()" title="" onmouseover="Titulos()">
+                        <input type="number" name="divCant" id="DivCant" pattern="/^-?\d+\.?\d*$/" class="text3" onKeyPress="if(this.value.length==7) return false; Javascript: if (event.keyCode==13) Convertir();" onfocus="Mayus()" title="" onmouseover="Titulos()">
                         <span class="tooltiptext">Ingrese la Cantidad a Convertir!</span>
                     </div>
                 </div>
@@ -85,26 +110,30 @@
         <div class="ButtonContainer">
             <div class="BotonClass">
                 <div class="botones0">
-                    <div class="btnvacio">                        
+                    <div class="btnvacio">
                     </div>
                 </div>
-                <div class="botones1">                    
-                    <button class="Convertir" onclick="Convertir()">
-                        <span>Convertir</span>                        
-                    </button>                    
+                <div class="botones1">
+                    <button class="Convertir" onclick="Convertir()" onkeypress="Javascript: if (event.keyCode==13) Convertir();" >
+                        <span>Convertir</span>
+                    </button>
                 </div>
                 <div class="botones1">
                     <button class="Limpiar" onclick="Limpiar()">
                         <span>Limpiar</span>
                     </button>
-                </div>                
+                </div>
                 <div class="botones0">
-                    <div class="btnvacio">                        
+                    <div class="btnvacio">
                     </div>
                 </div>
             </div>
         </div>
-    </div>        
+    </div>
+    <!-- <script type="text/javascript" src="script.js"></script> -->
     <script src="script.js"></script>
+    <!-- <script type="module" src="script.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <!-- <script type="module" src="ini.js"></script> -->
 </body>
 </html>
