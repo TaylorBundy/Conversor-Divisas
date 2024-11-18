@@ -1,24 +1,3 @@
-/* import 'style.css'
-
-const currencyConverter = document.getElementById('currency_converter');
-const baseCurrencyInput = document.getElementById('base_currency_input');
-const baseCurrency = document.getElementById('currency');
-const resultContainer = document.getElementById('result');
-
-currencyConverter.addEventListener('submit', (e) => {
- e.preventDefault();
-
- fetch(`http://localhost:5000/?` + new URLSearchParams({ 'base_currency_input': baseCurrencyInput.value, 'currency': baseCurrency.value }))
-   .then(response => response.json())
-   .then(data => {
-     var result = '<div class="space-y-1 px-5 py-3 border-2 rounded-md">';
-     for (let entry of data) {
-       result += `<div class="flex items-baseline justify-between"><span class="font-medium">${entry.code}:</span><span>${entry.value}</span></div>`;
-     }
-     resultContainer.innerHTML = result;
-   });
-}); */
-
 //creamos lista de simbolos monedas
 const simbolos= {
     "USD" : "U$D ",
@@ -72,8 +51,7 @@ let divCant = document.getElementById("DivCant")
 let divApi = document.getElementById("DivAkey")
 let divRes = document.getElementById("DivRes")
 
-const divApi2 = document.querySelector("#DivAkey")
-
+//definimos la variable etiqueta
 let Etiqueta = document.getElementById("Etiqueta")
 
 //definimos la funcion valores, que obtiene el valor de cada input
@@ -119,6 +97,7 @@ function Limpiar() {
   }
 }
 
+//definimos la funcion "SetTitle" para poner el titulo al navegaro y a la etiqueta
 function SetTitle() {
   if (ff.checked == true) {
     document.title = 'Conversor de Divisas - Fast Forex';
@@ -174,6 +153,8 @@ function ApiKeys() {
   }
 }
 
+//cuando termina de cargar la pagina, seteamos el focus en el div base,
+//luego llamamos a la funcion "ApiKeys" para cargar las apikeys
 window.onload = function() {
   try {
     divBase.focus()
@@ -220,7 +201,7 @@ function Titulos() {
 }
 
 //definimos funcion fastforex
-async function FastForexFetch() {
+async function Convertir() {
   apikey = divApi.value
   if (ff.checked) {
     url = "https://api.fastforex.io/fetch-one?from="
@@ -244,7 +225,8 @@ async function FastForexFetch() {
   }
   if (ca1.checked) {
     //apikey = "cur_live_UKoZAkSaznM6h9ynTnQdQlrunGJb6wIzHMlWs61q"
-    url = "https://api.currencyapi.com/v3/latest?apikey=cur_live_UKoZAkSaznM6h9ynTnQdQlrunGJb6wIzHMlWs61q&currencies="
+    //url = "https://api.currencyapi.com/v3/latest?apikey=cur_live_UKoZAkSaznM6h9ynTnQdQlrunGJb6wIzHMlWs61q&currencies="
+    url = 'https://api.currencyapi.com/v3/latest?apikey=' + apikey + '&currencies='
     url1 = "&base_currency="
     base = divBase.value
     cant = divCant.value
