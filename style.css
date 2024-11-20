@@ -644,4 +644,9 @@ p {
         font-size: 10;
         font-weight: normal;
     }
+    P {
+        font-weight: normal;
+        font-family: Verdana;
+        font-size: 10px;
+    }
 }
