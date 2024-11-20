@@ -610,6 +610,10 @@ p {
         display: inline-flex;
     }
 
+    .ApiClass {
+        display: inline-flex;
+    }
+
     .labels {
         font-size: 10px;
         font-weight: normal;
