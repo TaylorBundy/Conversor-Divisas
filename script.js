@@ -30,7 +30,10 @@ var TitulosList = [
   aapikey = "Ingrese la API-KEY del servicio a utilizar!",
   divbase = "Ingrese la Divisa Base que desea Convertir!",
   divconv = "Ingrese la Divisa a Convertir!",
-  divcant = "Ingrese la Cantidad a Convertir!"
+  divcant = "Ingrese la Cantidad a Convertir!",
+  btnConvertir = "Convertir divisas!",
+  btnLimpiar = "Limpiar contenidos de los inputs!",
+  erapi = "Er Api"
 ]
 
 //definimos variable de select
@@ -43,18 +46,21 @@ let ff1 = document.getElementById("ff1")
 let ca11 = document.getElementById("ca11")
 let ca21 = document.getElementById("ca21")
 let av1 = document.getElementById("av1")
+let er1 = document.getElementById("er1")
 
 //definimos variables de los radiobuttons
 let ff2 = document.getElementById("ff2")
 let ca12 = document.getElementById("ca12")
 let ca22 = document.getElementById("ca22")
 let av2 = document.getElementById("av2")
+let er2 = document.getElementById("er2")
 
 //definimos variables de los radiobuttons
 let ff = document.getElementById("ff")
 let ca1 = document.getElementById("ca1")
 let ca2 = document.getElementById("ca2")
 let av = document.getElementById("av")
+let er = document.getElementById("er")
 
 //definimos variables de los input
 let divBase = document.getElementById("DivBase")
@@ -62,6 +68,9 @@ let divConv = document.getElementById("DivConv")
 let divCant = document.getElementById("DivCant")
 let divApi = document.getElementById("DivAkey")
 let divRes = document.getElementById("DivRes")
+
+let btnconvertir = document.getElementById("BtnConvertir");
+let btnlimpiar = document.getElementById("BtnLimpiar");
 
 //definimos la variable etiqueta
 let Etiqueta = document.getElementById("Etiqueta")
@@ -125,6 +134,13 @@ function SetTitle() {
     document.title = 'Conversor de Divisas - Api Verve'
     Etiqueta.textContent = 'Api Verve'
     //ApiKeys()
+  } else if (er.checked == true) {
+  document.title = 'Conversor de Divisas - Er Api'
+  Etiqueta.textContent = 'Er Api'
+  //ApiKeys()
+  }
+  if (divRes != '') {
+    divRes.value = '';
   }
   ApiKeys()
   divBase.focus()
@@ -161,6 +177,9 @@ function ApiKeys() {
     }
     if (av.checked) {
       divApi.value = ApiKeysList[2]
+    }
+    if (er.checked) {
+      divApi.value = 'No necesita ApiKey'
     }
   }
 }
@@ -210,6 +229,17 @@ function Titulos() {
     av.title = TitulosList[3],
     av2.title = TitulosList[3]
   }
+  if (er1.onmouseover || er2.onmouseover || er.onmouseover) {
+    er1.title = TitulosList[10],
+    er.title = TitulosList[10],
+    er2.title = TitulosList[10]
+  }
+  if (btnconvertir.onmouseover) {
+    btnconvertir.title = TitulosList[8]
+  }
+  if (btnlimpiar.onmouseover) {
+    btnlimpiar.title = TitulosList[9]
+  }
 }
 
 //definimos funcion fastforex
@@ -219,80 +249,112 @@ async function Convertir() {
     divRes.value = 'Calculando'
   }
   finally {
-  if (ff.checked) {
-    url = "https://api.fastforex.io/fetch-one?from="
-    url1 = "&api_key=" + apikey
+    if (ff.checked) {
+      url = "https://api.fastforex.io/fetch-one?from="
+      url1 = "&api_key=" + apikey
 
-    base = divBase.value
-    cant = divCant.value
-    div = divConv.value
-    origen = url + base + "&to=" + div + url1
+      base = divBase.value
+      cant = divCant.value
+      div = divConv.value
+      origen = url + base + "&to=" + div + url1
 
-    try{
-        resp = await fetch(origen)
-        console.log(resp.json())
-        console.log(base)
-        //data = resp.json()
-        //divisas = data["result"]
-    }
-    catch{
-      print("Ha ocurrido un error")
-    }
-  }
-  if (ca1.checked) {
-    //apikey = "cur_live_UKoZAkSaznM6h9ynTnQdQlrunGJb6wIzHMlWs61q"
-    //url = "https://api.currencyapi.com/v3/latest?apikey=cur_live_UKoZAkSaznM6h9ynTnQdQlrunGJb6wIzHMlWs61q&currencies="
-    url = 'https://api.currencyapi.com/v3/latest?apikey=' + apikey + '&currencies='
-    url1 = "&base_currency="
-    base = divBase.value
-    cant = divCant.value
-    div = divConv.value
-    origen = url + div + url1 + base
-    if (div in simbolos) {
-      simbolo = simbolos[div]
-      //console.log(simbolo)
-    }
-    try{
-      const resp = await fetch(origen)
-      const data = await resp.json()
-      const datos = await data["data"]
-      const datos1 = await datos[div]
-      const divisas = await datos1["value"]
-      divRes.value = simbolo + divisas
-      //console.log(divisas)
-    }
-    catch{
-      print("Ha ocurrido un error")
-    }
-  }
-  if (av.checked) {
-    url = "https://api.apiverve.com/v1/currencyconverter?value="
-    base = divBase.value
-    cant = divCant.value
-    div = divConv.value
-    origen = url + cant + '&from=' + base + '&to=' + div
-    const options = {
-      headers:{
-        "x-api-key": apikey,
-	      "Accept": "application/json"
+      try{
+          resp = await fetch(origen)
+          console.log(resp.json())
+          console.log(base)
+          //data = resp.json()
+          //divisas = data["result"]
+      }
+      catch{
+        print("Ha ocurrido un error")
       }
     }
-    if (div in simbolos) {
-      simbolo = simbolos[div]
-      //console.log(simbolo)
+    if (ca1.checked) {
+      //apikey = "cur_live_UKoZAkSaznM6h9ynTnQdQlrunGJb6wIzHMlWs61q"
+      //url = "https://api.currencyapi.com/v3/latest?apikey=cur_live_UKoZAkSaznM6h9ynTnQdQlrunGJb6wIzHMlWs61q&currencies="
+      url = 'https://api.currencyapi.com/v3/latest?apikey=' + apikey + '&currencies='
+      url1 = "&base_currency="
+      base = divBase.value
+      cant = divCant.value
+      div = divConv.value
+      origen = url + div + url1 + base
+      if (div in simbolos) {
+        simbolo = simbolos[div]
+        //console.log(simbolo)
+      }
+      try{
+        const resp = await fetch(origen)
+        const data = await resp.json()
+        const datos = await data["data"]
+        const datos1 = await datos[div]
+        const divisas = await datos1["value"]
+        divRes.value = simbolo + divisas
+        //console.log(divisas)
+      }
+      catch{
+        print("Ha ocurrido un error")
+      }
     }
-    try {
-      const resp = await fetch(origen, options)
-      const data = await resp.json()
-      const datos = await data["data"]
-      const divisas = await datos["convertedValue"]
-      divRes.value = simbolo + divisas
-      //console.log(divisas)
+    if (av.checked) {
+      url = "https://api.apiverve.com/v1/currencyconverter?value="
+      base = divBase.value
+      cant = divCant.value
+      div = divConv.value
+      origen = url + cant + '&from=' + base + '&to=' + div
+      const options = {
+        headers:{
+          "x-api-key": apikey,
+          "Accept": "application/json"
+        }
+      }
+      if (div in simbolos) {
+        simbolo = simbolos[div]
+        //console.log(simbolo)
+      }
+      try {
+        const resp = await fetch(origen, options)
+        const data = await resp.json()
+        const datos = await data["data"]
+        const divisas = await datos["convertedValue"]
+        divRes.value = simbolo + divisas
+        //console.log(divisas)
+      }
+      catch {
+        print("Ha ocurrido un error")
+      }
     }
-    catch {
-      print("Ha ocurrido un error")
+    if (er.checked) {
+      //apikey = "cur_live_UKoZAkSaznM6h9ynTnQdQlrunGJb6wIzHMlWs61q"
+      //url = "https://api.currencyapi.com/v3/latest?apikey=cur_live_UKoZAkSaznM6h9ynTnQdQlrunGJb6wIzHMlWs61q&currencies="
+      url = 'https://open.er-api.com/v6/latest/' + divBase.value
+      url1 = "&base_currency="
+      base = divBase.value
+      cant = divCant.value
+      div = divConv.value
+      origen = url + div + url1 + base
+      if (div in simbolos) {
+        simbolo = simbolos[div]
+        //console.log(simbolo)
+      }
+      try{
+        //const resp = await fetch(origen)
+        const resp = await fetch(url)
+        const data = await resp.json()
+        //console.log(data)
+        //const datos = await data["data"]
+        const datos = await data["rates"]
+        //console.log(datos)
+        const datos1 = await datos[div]
+        //console.log(datos1)
+        //const divisas = await datos1["value"]
+        const divisas = cant * datos1
+        divRes.value = simbolo + divisas
+        //console.log(divisas)
+      }
+      catch{
+        print("Ha ocurrido un error")
+      }
     }
-  }
   }
 }
 

@@ -34,19 +34,25 @@
                         API Verve
                     </label>
                 </div>
+                <div class="Radios" id="er1" onmouseover="Titulos()">
+                    <label class="labels" id="er2" onmouseover="Titulos()">
+                        <input type="radio" class="radio" name="radios" id="er" value="ErAPI" onclick="SetTitle()" onmouseover="Titulos()" />
+                        ER API
+                    </label>
+                </div>
             </div>
         </div>
-        <div class="InputContainer2">
-            <div class="ApiClass">
-                <div class="Inputs2" id="">
-                    <p class="P2" id="">Datos de la API</p>
-                </div>
-                <div class="Inputs2" id="Apis">
-                    <input type="file" name="" id="file-input" class="" onmouseover="Titulos()" />
-                    <pre id="contenido-archivo"></pre>
-                    <form action="#">
-                        <label for="lang">Apis</label>
-                        <select name="lenguajes" id="lang">
+        <!-- <div class="InputContainer2"> -->
+            <!-- <div class="ApiClass"> -->
+                <!-- <div class="Inputs2" id=""> -->
+                    <!-- <p class="P2" id="">Datos de la API</p> -->
+                <!-- </div> -->
+                <!-- <div class="Inputs2" id="Apis"> -->
+                    <!-- <input type="file" name="" id="file-input" class="" onmouseover="Titulos()" /> -->
+                    <!-- <pre id="contenido-archivo"></pre> -->
+                    <!-- <form action="#"> -->
+                        <!-- <label for="lang">Apis</label> -->
+                        <!-- <select name="lenguajes" id="lang"> -->
                             <!-- <option value="javascript">JavaScript</option> -->
                             <!-- <option value="php">PHP</option> -->
                             <!-- <option value="java">Java</option> -->
@@ -55,12 +61,12 @@
                             <!-- <option value="c#">C#</option> -->
                             <!-- <option value="C++">C++</option> -->
                             <!-- <option value="erlang">Erlang</option> -->
-                        </select>
+                        <!-- </select> -->
                         <!-- <input type="submit" value="Enviar" onclick="leyendo()" /> -->
-                    </form>
-                </div>
-            </div>
-        </div>
+                    <!-- </form> -->
+                <!-- </div> -->
+            <!-- </div> -->
+        <!-- </div> -->
         <div class="InputContainer2">
             <div class="ApiClass">
                 <div class="Inputs2" id="Label">
@@ -114,12 +120,12 @@
                     </div>
                 </div>
                 <div class="botones1">
-                    <button class="Convertir" onclick="Convertir()" onkeypress="Javascript: if (event.keyCode==13) Convertir();" >
+                    <button class="Convertir" id="BtnConvertir" onclick="Convertir()" onkeypress="Javascript: if (event.keyCode==13) Convertir();" onmouseover="Titulos()">
                         <span>Convertir</span>
                     </button>
                 </div>
                 <div class="botones1">
-                    <button class="Limpiar" onclick="Limpiar()">
+                    <button class="Limpiar" id="BtnLimpiar" onclick="Limpiar()" onmouseover="Titulos()">
                         <span>Limpiar</span>
                     </button>
                 </div>

@@ -640,4 +640,7 @@ p {
     button:hover span {
         background: none;
     }
+    .text2 {
+        font-size: 10;
+    }
 }
