@@ -74,10 +74,11 @@
                 </div>
                 <div class="Inputs2" id="Api">
                     <p class="P1">API KEY: </p>
-                    <div class="tooltip">
-                        <input type="text" name="api" id="DivAkey" class="text2" onmouseover="Titulos()" />
-                        <span class="tooltiptext">Ingrese la API-KEY del servicio a utilizar!</span>
-                    </div>
+                    <!-- <div class="tooltip"> -->
+                        <input type="text" name="api" id="DivAkey" class="text2" onmouseover="Titulos()" style="visibility: collapse; display: none;" />
+                        <textarea name="text" id="DivAkey2" class="text2" rows="1" cols="10" wrap="hard" onmouseover="Titulos()" style="overflow: hidden; resize: none;" > </textarea>
+                        <!-- <span class="tooltiptext">Ingrese la API-KEY del servicio a utilizar!</span> -->
+                    <!-- </div> -->
                 </div>
             </div>
         </div>
@@ -85,31 +86,31 @@
             <div class="InputsClass">
                 <div class="Inputs">
                     <p class="P">Divisa Base: </p>
-                    <div class="tooltip">
+                    <!-- <div class="tooltip"> -->
                         <input type="text" name="divBase" id="DivBase" maxlength="3" class="text" oninput="SetFocus()" title="" onmouseover="Titulos()">
-                        <span class="tooltiptext">Ingrese la Divisa Base que desea Convertir!</span>
-                    </div>
+                        <!-- <span class="tooltiptext">Ingrese la Divisa Base que desea Convertir!</span> -->
+                    <!-- </div> -->
                 </div>
                 <div class="Inputs">
                     <p class="P">Divisa a Convertir: </p>
-                    <div class="tooltip">
+                    <!-- <div class="tooltip"> -->
                         <input type="text" name="divConv" id="DivConv" maxlength="3" class="text" oninput="SetFocus()" title="" onmouseover="Titulos()">
-                        <span class="tooltiptext">Ingrese la Divisa a Convertir!</span>
-                    </div>
+                        <!-- <span class="tooltiptext">Ingrese la Divisa a Convertir!</span> -->
+                    <!-- </div> -->
                 </div>
                 <div class="Inputs">
                     <p class="P">Cantidad: </p>
-                    <div class="tooltip">
+                    <!-- <div class="tooltip"> -->
                         <input type="number" name="divCant" id="DivCant" pattern="/^-?\d+\.?\d*$/" class="text3" onKeyPress="if(this.value.length==7) return false; Javascript: if (event.keyCode==13) Convertir();" onfocus="Mayus()" title="" onmouseover="Titulos()">
-                        <span class="tooltiptext">Ingrese la Cantidad a Convertir!</span>
-                    </div>
+                        <!-- <span class="tooltiptext">Ingrese la Cantidad a Convertir!</span> -->
+                    <!-- </div> -->
                 </div>
                 <div class="Inputs">
                     <p class="P">Resultado: </p>
-                    <div class="tooltip">
+                    <!-- <div class="tooltip"> -->
                         <input type="text" id="DivRes" class="text" value="" readonly="true">
-                        <span class="tooltiptext">Resultado!!!</span>
-                    </div>
+                        <!-- <span class="tooltiptext">Resultado!!!</span> -->
+                    <!-- </div> -->
                 </div>
             </div>
         </div>

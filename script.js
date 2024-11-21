@@ -67,6 +67,7 @@ let divBase = document.getElementById("DivBase")
 let divConv = document.getElementById("DivConv")
 let divCant = document.getElementById("DivCant")
 let divApi = document.getElementById("DivAkey")
+let divApi2 = document.getElementById("DivAkey2")
 let divRes = document.getElementById("DivRes")
 
 let btnconvertir = document.getElementById("BtnConvertir");
@@ -74,6 +75,9 @@ let btnlimpiar = document.getElementById("BtnLimpiar");
 
 //definimos la variable etiqueta
 let Etiqueta = document.getElementById("Etiqueta")
+
+var valorActual = '';
+var valorDespues = '';
 
 //definimos la funcion valores, que obtiene el valor de cada input
 function Valores() {
@@ -103,12 +107,13 @@ function SetFocus() {
 //set checked radiobutton1
 function Limpiar() {
   if (divBase.value != '' || divConv.value != '' || divCant.value != ''
-  || divRes.value != '' || divApi.value != '') {
-    divApi.value = ''
-    divBase.value = ''
-    divBase.focus()
-    divConv.value = ''
-    divCant.value = ''
+  || divRes.value != '' || divApi.value != '' || divApi2.value != '') {
+    divApi.value = '',
+    divApi2.value = '',
+    divBase.value = '',
+    divBase.focus(),
+    divConv.value = '',
+    divCant.value = '',
     divRes.value = ''
   }
   //si el radio button1 no esta checked, lo pasamos a true
@@ -120,30 +125,38 @@ function Limpiar() {
 
 //definimos la funcion "SetTitle" para poner el titulo al navegaro y a la etiqueta
 function SetTitle() {
-  if (ff.checked == true) {
-    document.title = 'Conversor de Divisas - Fast Forex';
-    Etiqueta.textContent = 'Fast Forex';
+  try {
+    if (ff.checked == true) {
+      document.title = 'Conversor de Divisas - Fast Forex';
+      Etiqueta.textContent = 'Fast Forex';
+      //ApiKeys()
+    } else if (ca1.checked == true) {
+      document.title = 'Conversor de Divisas - Currency API'
+      Etiqueta.textContent = 'Currency API'
+    } else if (ca2.checked == true) {
+      document.title = 'Conversor de Divisas - Currency API-2'
+      Etiqueta.textContent = 'Currency API-2'
+    } else if (av.checked == true) {
+      document.title = 'Conversor de Divisas - Api Verve'
+      Etiqueta.textContent = 'Api Verve'
+      //ApiKeys()
+    } else if (er.checked == true) {
+    document.title = 'Conversor de Divisas - Er Api'
+    Etiqueta.textContent = 'Er Api'
     //ApiKeys()
-  } else if (ca1.checked == true) {
-    document.title = 'Conversor de Divisas - Currency API'
-    Etiqueta.textContent = 'Currency API'
-  } else if (ca2.checked == true) {
-    document.title = 'Conversor de Divisas - Currency API-2'
-    Etiqueta.textContent = 'Currency API-2'
-  } else if (av.checked == true) {
-    document.title = 'Conversor de Divisas - Api Verve'
-    Etiqueta.textContent = 'Api Verve'
-    //ApiKeys()
-  } else if (er.checked == true) {
-  document.title = 'Conversor de Divisas - Er Api'
-  Etiqueta.textContent = 'Er Api'
-  //ApiKeys()
+    }
+    if (divRes != '') {
+      divRes.value = '';
+    }
   }
-  if (divRes != '') {
-    divRes.value = '';
+  finally {
+    ApiKeys();
+    if (divBase.value == '' || divConv.value == '' || divCant.value == '') {
+      divBase.focus();
+    } else if (divBase.value != '' || divConv.value != '' || divCant.value != '') {
+      divCant.focus();
+    }
   }
-  ApiKeys()
-  divBase.focus()
 }
 
 //definimos la funcion para pasar los datos de los inputs a mayuscula
@@ -163,37 +176,64 @@ function Mayus() {
 //definimos funcion para obtener apikeys
 function ApiKeys() {
   try {
-    divApi.value = ''
+    divApi.value = '';
+    divApi2.value = '';
   }
   finally {
-    if (ff.checked == true) {
-      divApi.value = ApiKeysList[0]
+    try {
+      if (ff.checked == true) {
+        divApi.value = ApiKeysList[0]
+        divApi2.value = ApiKeysList[0]
+      }
+      if (ca1.checked == true) {
+        divApi.value = ApiKeysList[1]
+        divApi2.value = ApiKeysList[1]        
+      }
+      if (ca2.checked == true) {
+        divApi.value = ApiKeysList[1]
+        divApi2.value = ApiKeysList[1]
+      }
+      if (av.checked) {
+        divApi.value = ApiKeysList[2]
+        divApi2.value = ApiKeysList[2]        
+      }
+      if (er.checked) {
+        divApi.value = 'No necesita ApiKey',
+        divApi2.value = 'No necesita ApiKey'
+      }
     }
-    if (ca1.checked == true) {
-      divApi.value = ApiKeysList[1]
-    }
-    if (ca2.checked == true) {
-      divApi.value = ApiKeysList[1]
-    }
-    if (av.checked) {
-      divApi.value = ApiKeysList[2]
-    }
-    if (er.checked) {
-      divApi.value = 'No necesita ApiKey'
-    }
+    finally {
+      //let valorActual = divApi2.value;
+      //valorDespues = divApi2.value;
+      //console.log("valoractual: " + valorActual);
+      //console.log("valordespues: " + valorDespues);
+      setTimeout(function(){
+        autoResize();
+      }, 500);
+    }    
   }
 }
+
+const delay = (s) => {
+  return new Promise((resolve) => setTimeout(resolve, s * 1000));
+};
 
 //cuando termina de cargar la pagina, seteamos el focus en el div base,
 //luego llamamos a la funcion "ApiKeys" para cargar las apikeys
 window.onload = function() {
   try {
-    divBase.focus()
+    divBase.focus();
   }
   finally {
-    ApiKeys()
+    ApiKeys();
+    //setTimeout(function(){
+      //valorActual = divApi2.value;
+      //console.log(valorActual);
+    //}, 2000);
   }
 }
+
+//window.document.readyState
 
 //definimos la funcion para poner titulos
 function Titulos() {
@@ -208,6 +248,9 @@ function Titulos() {
   }
   if (divApi.onmouseover) {
     divApi.title = TitulosList[4]
+  }
+  if (divApi2.onmouseover) {
+    divApi2.title = TitulosList[4]
   }
   if (ff1.onmouseover || ff2.onmouseover || ff.onmouseover) {
     ff1.title = TitulosList[0],
@@ -244,9 +287,10 @@ function Titulos() {
 
 //definimos funcion fastforex
 async function Convertir() {
-  apikey = divApi.value
+  apikey = divApi2.value
   try {
     divRes.value = 'Calculando'
+    await delay(2);
   }
   finally {
     if (ff.checked) {
@@ -365,30 +409,28 @@ async function Convertir() {
 //   }
 // });
 
-function leerArchivo(e) {
+/* function leerArchivo(e) {
   var archivo = e.target.files[0];
   if (!archivo) {
     return;
   }
   var lector = new FileReader();
   lector.onload = function(e) {
-    var contenido = e.target.result;
-    //var conte = e.target;
-    //console.log(contenido)
+    var contenido = e.target.result;    
     lector.onloadend = () => leyendo(contenido);
     //return contenido
     //mostrarContenido(contenido);
   };
   lector.readAsText(archivo);
-}
+} */
 
-function mostrarContenido(contenido) {
+/* function mostrarContenido(contenido) {
   var elemento = document.getElementById('contenido-archivo');
   elemento.innerHTML = contenido;
-}
+} */
 
-document.getElementById('file-input')
-  .addEventListener('change', leerArchivo, false);
+/* document.getElementById('file-input')
+  .addEventListener('change', leerArchivo, false); */
 
 function parseINIString(data){
   var regex = {
@@ -587,6 +629,35 @@ function AddItem(items) {
   sel.add(new Option(opt));
   sel.append(opt);
 }
+
+const textarea = document.querySelector("#DivAkey2");
+
+
+function autoResize() {
+  //const valorActual = divApi2.value;
+  //valorActual = divApi2.value;
+  //console.log(valorActual);
+  if (textarea.value.length > 40) {
+    textarea.style.height = 'auto';
+    //textarea.style.height = divApi2.scrollHeight + 'px';
+    textarea.style.overflow = 'scroll';
+    //console.log(textarea.value);
+    // textarea.style.resize = 'none';
+    //console.log(textarea.value.length);
+    
+  } else {
+    textarea.style.overflow = 'hidden';
+    textarea.style.resize = 'none';
+    //console.log(textarea.value.length);
+  }
+}
+
+//textarea.addEventListener('change', autoResize, false);
+//document.getElementById("DivAkey2")
+  //.addEventListener("change", autoResize, false);
+
+//document.getElementById('DivAkey2')
+  //.addEventListener('input', autoResize, false);
 
 /* function creaArchivo() {
   var ini = new Ini();
