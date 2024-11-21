@@ -626,7 +626,7 @@ p {
         display: inline-flex;
     }
 
-    #Api {        
+    #Api {
         display: grid;
     }
 
@@ -634,6 +634,15 @@ p {
         /* width: 70%; */
         width: auto;
         /* flex-grow: 1; */
+        font-size: 10px;
+    }
+
+    .P2 {
+        font-size: 12px;
+    }
+
+    #Label {
+        padding: 0;
     }
 
     .labels {
@@ -659,6 +668,23 @@ p {
         width: 70%;
     }
 
+    .BotonClass {
+        display: grid;
+        /* align-content: center; */
+        flex-grow: 0;
+        place-items: center;
+    }
+
+    .botones1 {
+        flex-grow: 0;
+        padding: 0;
+    }
+
+    button {
+        flex-grow: 0;
+        display: block;
+    }
+
     button:active {
         transform: scale();
     }
@@ -666,26 +692,24 @@ p {
     button:hover span {
         background: none;
     }
+
+    .text {
+        font-weight: normal;  
+        font-size: 12px; 
+    }
+
     .text2 {
         font-size: 10px;
         font-weight: normal;
         text-align: center;
-        /* margin-top: 5px; */
         width: auto;
-        /* word-wrap: break-word; */
-        /* overflow: scroll; */
-        /* resize: vertical; */
-        /* line-height: 1em; */
-        /* height: 11px; */
-        
-        /* inline-size: auto; */
-        /* overflow: hidden; */
-        /* overflow-wrap: break-word; */
-        /* word-wrap: break-word; */
-        /* word-break: break-all; */
-        /* height: auto; */
     }
-    
+
+    .text3 {
+        font-weight: normal;
+        font-size: 10px;
+    }
+
     #DivAkey2 {
         /* display: block; */
         /* overflow: hidden; */

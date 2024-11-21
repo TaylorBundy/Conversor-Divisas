@@ -16,7 +16,8 @@ const simbolos= {
 
 //definimos las Api Keys
 var ApiKeysList = [
-  fastforex = "42e1f6bd1c-cab594ea40-slw03x",
+  //fastforex = "42e1f6bd1c-cab594ea40-slw03x",
+  fastforex = "22b4888bca-b31a00af95-sna5fn",
   currencyapi = "cur_live_UKoZAkSaznM6h9ynTnQdQlrunGJb6wIzHMlWs61q",
   apiverve = "b5dde781-7fd0-4dde-80e2-f2939cc785b9"
 ]
@@ -33,7 +34,8 @@ var TitulosList = [
   divcant = "Ingrese la Cantidad a Convertir!",
   btnConvertir = "Convertir divisas!",
   btnLimpiar = "Limpiar contenidos de los inputs!",
-  erapi = "Er Api"
+  erapi = "Er Api",
+  btnInvertir = "Invertir divisas!"
 ]
 
 //definimos variable de select
@@ -72,6 +74,7 @@ let divRes = document.getElementById("DivRes")
 
 let btnconvertir = document.getElementById("BtnConvertir");
 let btnlimpiar = document.getElementById("BtnLimpiar");
+let btninvertir = document.getElementById("BtnInvertir");
 
 //definimos la variable etiqueta
 let Etiqueta = document.getElementById("Etiqueta")
@@ -120,6 +123,23 @@ function Limpiar() {
   if (ff.checked != true) {
     ff.checked = true;
     SetTitle();
+  }
+}
+
+//definimos la funcion para invertir los valores de las divisas
+function Invertir() {
+  if (divBase.value != '' || divConv.value != '') {
+    var valor1 = divBase.value
+    var valor2 = divConv.value
+    try {    
+      if (valor1 != valor2) {
+        divBase.value = valor2
+        divConv.value = valor1
+      }
+    }
+    finally {
+      divCant.focus()
+    }
   }
 }
 
@@ -283,6 +303,9 @@ function Titulos() {
   if (btnlimpiar.onmouseover) {
     btnlimpiar.title = TitulosList[9]
   }
+  if (btninvertir.onmouseover) {
+    btninvertir.title = TitulosList[11]
+  }
 }
 
 //definimos funcion fastforex
@@ -301,13 +324,20 @@ async function Convertir() {
       cant = divCant.value
       div = divConv.value
       origen = url + base + "&to=" + div + url1
-
+      if (div in simbolos) {
+        simbolo = simbolos[div]
+        //console.log(simbolo)
+      }
       try{
-          resp = await fetch(origen)
-          console.log(resp.json())
-          console.log(base)
-          //data = resp.json()
-          //divisas = data["result"]
+          const resp = await fetch(origen)
+          //console.log(resp.json())
+          //console.log(base)
+          const data = await resp.json()
+          const divisas = await data["result"]
+          const resultado = divisas[div] * cant
+          //console.log(divisas[div])
+          //console.log(resultado)
+          divRes.value = simbolo + resultado.toFixed(4)
       }
       catch{
         print("Ha ocurrido un error")
@@ -332,7 +362,7 @@ async function Convertir() {
         const datos = await data["data"]
         const datos1 = await datos[div]
         const divisas = await datos1["value"]
-        divRes.value = simbolo + divisas
+        divRes.value = simbolo + divisas.toFixed(4)
         //console.log(divisas)
       }
       catch{
@@ -360,7 +390,7 @@ async function Convertir() {
         const data = await resp.json()
         const datos = await data["data"]
         const divisas = await datos["convertedValue"]
-        divRes.value = simbolo + divisas
+        divRes.value = simbolo + divisas.toFixed(4)
         //console.log(divisas)
       }
       catch {
@@ -392,7 +422,7 @@ async function Convertir() {
         //console.log(datos1)
         //const divisas = await datos1["value"]
         const divisas = cant * datos1
-        divRes.value = simbolo + divisas
+        divRes.value = simbolo + divisas.toFixed(4)
         //console.log(divisas)
       }
       catch{
