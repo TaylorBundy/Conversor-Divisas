@@ -442,9 +442,12 @@ async function Convertir() {
       catch{
         print("Ha ocurrido un error")
       }
-    }
-    document.activeElement.blur()
+    }    
   }
+}
+
+function hideKeyboard() {
+  document.activeElement.blur();
 }
 
 //creamos funcion para comprobar la divisa
