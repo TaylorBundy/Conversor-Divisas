@@ -606,6 +606,30 @@ p {
     }
 }
 
+@media only screen and (orientation: landscape) {
+    body {
+        width: 100%;
+    }
+    .text2 {
+        font-size: 10px;
+        font-weight: normal;
+        text-align: center;
+        /* width: auto; */
+    }
+    #DivAkey2 {
+        /* display: block; */
+        /* overflow: hidden; */
+        /* overflow: scroll; */
+        resize: none;
+        word-wrap: break-word;
+    }
+    P {
+        font-weight: normal;
+        font-family: Verdana;
+        font-size: 10px;
+    }
+}
+
 @media only screen and (max-width: 400px) {
     body {
         width: 100%;
