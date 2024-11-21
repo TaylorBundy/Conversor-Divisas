@@ -87,14 +87,16 @@
                 <div class="Inputs">
                     <p class="P">Divisa Base: </p>
                     <!-- <div class="tooltip"> -->
-                        <input type="text" name="divBase" id="DivBase" maxlength="3" class="text" oninput="SetFocus()" title="" onmouseover="Titulos()">
+                        <input type="text" name="divBase" id="DivBase" maxlength="3" class="text" oninput="SetFocus()" title="" onmouseover="Titulos()" onkeyup="getValue(this.value, this.id)" >
+                        <!-- <ul class="sugerencias"></ul> -->
+                        <div class="output"></div>
                         <!-- <span class="tooltiptext">Ingrese la Divisa Base que desea Convertir!</span> -->
                     <!-- </div> -->
                 </div>
                 <div class="Inputs">
                     <p class="P">Divisa a Convertir: </p>
                     <!-- <div class="tooltip"> -->
-                        <input type="text" name="divConv" id="DivConv" maxlength="3" class="text" oninput="SetFocus()" title="" onmouseover="Titulos()">
+                        <input type="text" name="divConv" id="DivConv" maxlength="3" class="text" oninput="SetFocus()" title="" onmouseover="Titulos()" onkeyup="getValue(this.value, this.id)">
                         <!-- <span class="tooltiptext">Ingrese la Divisa a Convertir!</span> -->
                     <!-- </div> -->
                 </div>
@@ -108,7 +110,7 @@
                 <div class="Inputs">
                     <p class="P">Resultado: </p>
                     <!-- <div class="tooltip"> -->
-                        <input type="text" id="DivRes" class="text" value="" readonly="true" >
+                        <input type="text" id="DivRes" class="text"  value="" readonly="true" >
                         <!-- <span class="tooltiptext">Resultado!!!</span> -->
                     <!-- </div> -->
                 </div>

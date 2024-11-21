@@ -5,6 +5,14 @@
 
 //var parser = require('ini-parser')
 
+const simbolos2 = [
+  USD = "U$D ",
+  ARS = "$ ",
+  EUR = "€ ",
+  GBP = "£ ",
+  MXN = "MX$ "
+]
+
 //creamos lista de simbolos monedas
 const simbolos= {
     "USD" : "U$D ",
@@ -77,7 +85,7 @@ let btnlimpiar = document.getElementById("BtnLimpiar");
 let btninvertir = document.getElementById("BtnInvertir");
 
 //definimos la variable etiqueta
-let Etiqueta = document.getElementById("Etiqueta")
+let Etiqueta = document.getElementById("Etiqueta");
 
 var valorActual = '';
 var valorDespues = '';
@@ -97,10 +105,10 @@ function Valores() {
 
 //definimos la funcion para pasar el focus al proximo input al llegar a 3 caracteres
 function SetFocus() {
-  if (divBase.value.length === 3) {
+  if (divBase.value.length === 3 && divConv.value.length === 0) {
     divConv.focus()
   }
-  if (divConv.value.length === 3) {
+  if (divConv.value.length === 3 && divBase.value.length === 3) {
     divCant.focus()
   }
 }
@@ -129,16 +137,17 @@ function Limpiar() {
 //definimos la funcion para invertir los valores de las divisas
 function Invertir() {
   if (divBase.value != '' || divConv.value != '') {
-    var valor1 = divBase.value
-    var valor2 = divConv.value
+    var valor1 = divBase.value;
+    var valor2 = divConv.value;
     try {    
       if (valor1 != valor2) {
-        divBase.value = valor2
-        divConv.value = valor1
+        divBase.value = valor2;
+        divConv.value = valor1;
       }
     }
     finally {
-      divCant.focus()
+      divCant.focus();
+      divRes.value = '';
     }
   }
 }
@@ -319,6 +328,7 @@ async function Convertir() {
     if (ff.checked) {
       url = "https://api.fastforex.io/fetch-one?from="
       url1 = "&api_key=" + apikey
+      url2 = "https://api.fastforex.io/currencies?api_key="
 
       base = divBase.value
       cant = divCant.value
@@ -330,11 +340,15 @@ async function Convertir() {
       }
       try{
           const resp = await fetch(origen)
+          const resp2 = await fetch(url2 + apikey)
           //console.log(resp.json())
           //console.log(base)
           const data = await resp.json()
+          //const data2 = await resp2.json()
+          //const curren = await data2["currencies"]
           const divisas = await data["result"]
           const resultado = divisas[div] * cant
+          //console.log(data2)
           //console.log(divisas[div])
           //console.log(resultado)
           divRes.value = simbolo + resultado.toFixed(4)
@@ -430,6 +444,22 @@ async function Convertir() {
       }
     }
   }
+}
+
+//creamos funcion para comprobar la divisa
+function CompDivisa() {
+  base = divBase.value;
+  conv = divConv.value;
+  if (simbolos2.includes(base)) {
+    divBase.value = simbolos2[base];
+  }
+  /* const pushElementToArray = (arr, el) => {
+    if(arr.includes(el)) {
+      console.log(`${el} ya existe en el array`);
+    } else {
+      arr.push(el);
+    }
+  } */
 }
 
 // window = new BrowserWindow({
@@ -681,6 +711,61 @@ function autoResize() {
     //console.log(textarea.value.length);
   }
 }
+
+/* function autoComplete(current) {
+  const simbolos3 = ['USD', "ARS", "EUR", "GBP", "MXN"];
+  //return simbolos3;
+  return simbolos3.filter((valor) => {
+    const valorMinuscula = valor
+    const ciudadMinuscula = valor
+    console.log(valorMinuscula.includes(ciudadMinuscula))
+    return valorMinuscula.includes(ciudadMinuscula)
+})
+} */
+
+const inputField = document.querySelector('#DivBase')
+const result = document.querySelector('.output')
+//const sugerencias = document.querySelector('.sugerencias')
+const simbolos3 = ['USD', "ARS", "EUR", "GBP", "MXN"]
+
+function autoComplete(simbolos3, val) {
+  return simbolos3.filter(e => e.toLowerCase().includes(val.toLowerCase()));
+}
+function getValue(val, id){
+  const inputField2 = document.querySelector('#'+id)
+  if(!val){
+    result.innerHTML='';
+    return
+  }
+  //console.log(inputField2.value)
+  var data = autoComplete(simbolos3,val);    
+  for (var i = 0; i < data.length; i++) {
+    if (inputField2.value.length >= 2) {
+      try {
+        inputField2.value = data[i];
+      }
+      finally {
+        SetFocus()
+      }
+    }
+  }
+}
+
+//inputField.addEventListener('input', autoComplete);
+/* inputField.addEventListener('input', ({ target }) => {
+  const datosDelCampo = target.value
+  if(datosDelCampo.length) {
+    const autoCompleteValores = autoComplete(datosDelCampo)
+     sugerencias.innerHTML = `
+       ${autoCompleteValores.map((value) => {
+           return (
+                  `<li>${value}</li>`
+                 )
+         }).join('')}
+    `}
+}) */
+
+
 
 //textarea.addEventListener('change', autoResize, false);
 //document.getElementById("DivAkey2")

@@ -232,6 +232,14 @@ label:has(input[type="radio"]:checked) {
     /* transition: scale 0.8s ease; */
 }
 
+#DivRes {
+    color: darkgreen;
+}
+
+#DivRes:hover {
+    color: #fff;
+}
+
 .text:is(:focus):is(:hover) {
     border: 1px solid transparent;
     transition: all 0.1s ease;
