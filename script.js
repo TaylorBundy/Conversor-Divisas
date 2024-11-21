@@ -443,6 +443,7 @@ async function Convertir() {
         print("Ha ocurrido un error")
       }
     }
+    document.activeElement.blur()
   }
 }
 
