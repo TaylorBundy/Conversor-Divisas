@@ -599,14 +599,43 @@ p {
     /* resize: none; */
 /* } */
 
-@media(max-width:991px) {
+@media only screen and (max-width:991px) {
+/* @media only screen and (max-width:1500px) { */
     body {
         /* padding: 100px; */
         width: 100%;
     }
+
+    /* .BotonClass { */
+        /* display: flex; */
+    /* } */
 }
 
-@media only screen and (orientation: landscape) {
+@media only screen and (max-width:650px) {
+    /* body { */
+        /* padding: 100px; */
+        /* width: 100%; */
+    /* } */
+    body {
+        width: 100%;
+    }
+    .BotonClass {
+        display: grid;
+        /* align-content: center; */
+        flex-grow: 0;
+        place-items: center;
+    }
+
+    .botones0 {
+        padding: 0;
+    }
+
+    .botones1 {
+        padding: 0;
+    }
+}
+
+@media only screen and (orientation: landscape) and (max-width: 400px) {
     body {
         width: 100%;
     }
