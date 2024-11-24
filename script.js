@@ -255,7 +255,8 @@ function ApiKeys() {
       if (divApi2.value == '') {
         valorCookie = ''
       } else {
-        valorCookie = comprobarCookie(nombre_cookie)
+        //valorCookie = comprobarCookie(nombre_cookie)
+        valorCookie = divApi2.value
       }
       //valorCookie = divApi2.value;
       //var data = new Date();
@@ -265,7 +266,7 @@ function ApiKeys() {
       setTimeout(function(){
         //document.cookie = divApi2.value;
         //console.log(valorCookie);
-        crearCookie(nombre_cookie, valorCookie, expira);
+        //crearCookie(nombre_cookie, valorCookie, expira);
         autoResize();
         //alertCookie();
       }, 500);
@@ -348,7 +349,7 @@ function comprobarCookie(clave) {
   var clave = obtenerCookie(clave);
   if (clave != "") {
       // La cookie existe.
-      divApi2.value = clave 
+      //divApi2.value = clave 
       console.log(clave);
   } else {
       // La cookie no existe. 
@@ -536,7 +537,7 @@ async function Convertir() {
         print("Ha ocurrido un error")
       }
     } 
-    if (Etiqueta.textContent != '' && divApi2.value != '') {
+    if (Etiqueta.textContent != '' || divApi2.value != '') {
       try {
         nombre_cookie = Etiqueta.textContent
         valorCookie = divApi2.value   
