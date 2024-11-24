@@ -267,6 +267,7 @@ function ApiKeys() {
         //document.cookie = divApi2.value;
         //console.log(valorCookie);
         //crearCookie(nombre_cookie, valorCookie, expira);
+        comprobarCookie(nombre_cookie)
         autoResize();
         //alertCookie();
       }, 500);
@@ -349,7 +350,7 @@ function comprobarCookie(clave) {
   var clave = obtenerCookie(clave);
   if (clave != "") {
       // La cookie existe.
-      //divApi2.value = clave 
+      divApi2.value = clave 
       console.log(clave);
   } else {
       // La cookie no existe. 
