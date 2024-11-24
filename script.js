@@ -321,11 +321,11 @@ function crearCookie(nombre, valorCookie, dias) {
   var nuevaCookie = nombre + "=" + valorCookie + ";expires=" + expira
   //document.cookie = nuevaCookie;
   document.cookie = nombre + "=" + valorCookie + ";" + "expires" + "=" + expira
-  var lola = document.cookie
-  console.log(document.cookie.split(';'))
-  console.log(lola)
+  //var lola = document.cookie
+  //console.log(document.cookie.split(';'))
+  //console.log(lola)
   //console.log(expira)
-  console.log(nuevaCookie.split(';'))
+  //console.log(nuevaCookie.split(';'))
 }
 
 function obtenerCookie(clave) {
