@@ -351,7 +351,7 @@ function comprobarCookie(clave) {
   if (clave != "") {
       // La cookie existe.
       divApi2.value = clave 
-      console.log(clave);
+      //console.log(clave);
   } else {
       // La cookie no existe. 
   }
