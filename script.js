@@ -225,23 +225,23 @@ function ApiKeys() {
   finally {
     try {
       if (ff.checked == true) {
-        divApi.value = ApiKeysList[0]
-        divApi2.value = ApiKeysList[0]
+        //divApi.value = ApiKeysList[0]
+        //divApi2.value = ApiKeysList[0]
       }
       if (ca1.checked == true) {
-        divApi.value = ApiKeysList[1]
+        //divApi.value = ApiKeysList[1]
         divApi2.value = ApiKeysList[1]        
       }
       if (ca2.checked == true) {
-        divApi.value = ApiKeysList[1]
+        //divApi.value = ApiKeysList[1]
         divApi2.value = ApiKeysList[1]
       }
       if (av.checked) {
-        divApi.value = ApiKeysList[2]
+        //divApi.value = ApiKeysList[2]
         divApi2.value = ApiKeysList[2]        
       }
       if (er.checked) {
-        divApi.value = 'No necesita ApiKey',
+        //divApi.value = 'No necesita ApiKey',
         divApi2.value = 'No necesita ApiKey'
       }
     }
@@ -252,7 +252,12 @@ function ApiKeys() {
       //console.log("valordespues: " + valorDespues);
       //var nombre_cookie = Etiqueta.textContent;
       nombre_cookie = Etiqueta.textContent;
-      valorCookie = divApi2.value;
+      if (divApi2.value == '') {
+        valorCookie = ''
+      } else {
+        valorCookie = comprobarCookie(nombre_cookie)
+      }
+      //valorCookie = divApi2.value;
       //var data = new Date();
       //data.setTime(data.getTime() + 365 * 24 * 60 * 60 * 1000);
       //var expira = data.toUTCString();
