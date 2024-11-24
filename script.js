@@ -347,7 +347,8 @@ function obtenerCookie(clave) {
 function comprobarCookie(clave) {
   var clave = obtenerCookie(clave);
   if (clave != "") {
-      // La cookie existe. 
+      // La cookie existe.
+      divApi2.value = clave 
       console.log(clave);
   } else {
       // La cookie no existe. 
@@ -447,7 +448,7 @@ async function Convertir() {
       }
       catch{
         print("Ha ocurrido un error")
-      }
+      }      
     }
     if (ca1.checked) {
       //apikey = "cur_live_UKoZAkSaznM6h9ynTnQdQlrunGJb6wIzHMlWs61q"
@@ -534,7 +535,16 @@ async function Convertir() {
       catch{
         print("Ha ocurrido un error")
       }
-    }    
+    } 
+    if (Etiqueta.textContent != '' && divApi2.value != '') {
+      try {
+        nombre_cookie = Etiqueta.textContent
+        valorCookie = divApi2.value   
+      }
+      finally {
+        crearCookie(nombre_cookie, valorCookie, expira)
+      }
+    }
   }
 }
 
