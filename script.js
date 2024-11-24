@@ -230,15 +230,15 @@ function ApiKeys() {
       }
       if (ca1.checked == true) {
         //divApi.value = ApiKeysList[1]
-        divApi2.value = ApiKeysList[1]        
+        //divApi2.value = ApiKeysList[1]        
       }
       if (ca2.checked == true) {
         //divApi.value = ApiKeysList[1]
-        divApi2.value = ApiKeysList[1]
+        //divApi2.value = ApiKeysList[1]
       }
       if (av.checked) {
         //divApi.value = ApiKeysList[2]
-        divApi2.value = ApiKeysList[2]        
+        //divApi2.value = ApiKeysList[2]        
       }
       if (er.checked) {
         //divApi.value = 'No necesita ApiKey',
