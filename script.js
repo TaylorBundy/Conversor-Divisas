@@ -90,6 +90,11 @@ let Etiqueta = document.getElementById("Etiqueta");
 //definimos la variable cookie
 //document.cookie = divApi2.value;
 //let galleta = document.cookie;
+var data = new Date();
+data.setTime(data.getTime() + 365 * 24 * 60 * 60 * 1000);
+var expira = data.toUTCString();
+let nombre_cookie = '';
+let valorCookie = '';
 
 var valorActual = '';
 var valorDespues = '';
@@ -187,7 +192,7 @@ function SetTitle() {
       divRes.value = '';
     }
   }
-  finally {
+  finally {    
     ApiKeys();
     if (divBase.value == '' || divConv.value == '' || divCant.value == '') {
       divBase.focus();
@@ -245,15 +250,16 @@ function ApiKeys() {
       //valorDespues = divApi2.value;
       //console.log("valoractual: " + valorActual);
       //console.log("valordespues: " + valorDespues);
-      var nombre_cookie = "nombreUsuario";
-      var valorCookie = divApi2.value;
-      var data = new Date();
-      data.setTime(data.getTime() + 365 * 24 * 60 * 60 * 1000);
-      var expira = data.toUTCString();
+      //var nombre_cookie = Etiqueta.textContent;
+      nombre_cookie = Etiqueta.textContent;
+      valorCookie = divApi2.value;
+      //var data = new Date();
+      //data.setTime(data.getTime() + 365 * 24 * 60 * 60 * 1000);
+      //var expira = data.toUTCString();
       //var ruta = "./";
       setTimeout(function(){
         //document.cookie = divApi2.value;
-        console.log(valorCookie);
+        //console.log(valorCookie);
         crearCookie(nombre_cookie, valorCookie, expira);
         autoResize();
         //alertCookie();
@@ -273,7 +279,14 @@ window.onload = function() {
     divBase.focus();
   }
   finally {
-    ApiKeys();
+    try {
+      ApiKeys();
+    }
+    finally {
+      setTimeout(function() {
+        comprobarCookie(nombre_cookie);
+      }, 1000);
+    }
     //setTimeout(function(){
       //valorActual = divApi2.value;
       //console.log(valorActual);
@@ -283,7 +296,7 @@ window.onload = function() {
 
 //var nombre_cookie = "nombreUsuario";
 //var valorCookie = divApi2.value;
-var data = new Date();
+//var data = new Date();
 //data.setTime(data.getTime() + 365 * 24 * 60 * 60 * 1000);
 //var expira = data.toUTCString();
 //var ruta = "./";
@@ -305,11 +318,35 @@ function crearCookie(nombre, valorCookie, dias) {
     // "/" representa el directorio raíz. O sea: la cookie es accesible en todo el dominio web si var ruta = "/subdirectorio" la cookie será accesible solo en este subdirectorio. 
 }
   //var nuevaCookie = nombre + "=" + valorCookie + "; expires=" + expira + "; path=" + ruta;
-  var nuevaCookie = nombre + "=" + valorCookie + "; expires=" + expira;
-  document.cookie = nuevaCookie;
-  console.log(document.cookie);
-  console.log(expira)
+  var nuevaCookie = nombre + "=" + valorCookie + ";expires=" + expira
+  //document.cookie = nuevaCookie;
+  document.cookie = nombre + "=" + valorCookie + ";" + "expires" + "=" + expira
+  var lola = document.cookie
+  console.log(document.cookie.split(';'))
+  console.log(lola)
+  //console.log(expira)
   console.log(nuevaCookie.split(';'))
+}
+
+function obtenerCookie(clave) {
+  var name = clave + "=";
+  var ca = document.cookie.split(';');
+  for (var i = 0; i < ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0) == ' ') c = c.substring(1);
+      if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+  }
+  return "";
+}
+
+function comprobarCookie(clave) {
+  var clave = obtenerCookie(clave);
+  if (clave != "") {
+      // La cookie existe. 
+      console.log(clave);
+  } else {
+      // La cookie no existe. 
+  }
 }
 
 //window.document.readyState
