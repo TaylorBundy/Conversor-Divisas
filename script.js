@@ -87,8 +87,17 @@ let btninvertir = document.getElementById("BtnInvertir");
 //definimos la variable etiqueta
 let Etiqueta = document.getElementById("Etiqueta");
 
+//definimos la variable cookie
+//document.cookie = divApi2.value;
+//let galleta = document.cookie;
+
 var valorActual = '';
 var valorDespues = '';
+
+//function alertCookie() {
+  //console.log(document.cookie);
+  //alert(document.cookie); // visualizar: nombre=oeschger;comida favorita=tripa
+//}
 
 //definimos la funcion valores, que obtiene el valor de cada input
 function Valores() {
@@ -236,8 +245,18 @@ function ApiKeys() {
       //valorDespues = divApi2.value;
       //console.log("valoractual: " + valorActual);
       //console.log("valordespues: " + valorDespues);
+      var nombre_cookie = "nombreUsuario";
+      var valorCookie = divApi2.value;
+      var data = new Date();
+      data.setTime(data.getTime() + 365 * 24 * 60 * 60 * 1000);
+      var expira = data.toUTCString();
+      //var ruta = "./";
       setTimeout(function(){
+        //document.cookie = divApi2.value;
+        console.log(valorCookie);
+        crearCookie(nombre_cookie, valorCookie, expira);
         autoResize();
+        //alertCookie();
       }, 500);
     }    
   }
@@ -260,6 +279,37 @@ window.onload = function() {
       //console.log(valorActual);
     //}, 2000);
   }
+}
+
+//var nombre_cookie = "nombreUsuario";
+//var valorCookie = divApi2.value;
+var data = new Date();
+//data.setTime(data.getTime() + 365 * 24 * 60 * 60 * 1000);
+//var expira = data.toUTCString();
+//var ruta = "./";
+
+//var nuevaCookie =  nombre_cookie + "=" + valorCookie + "; expires=" + expira + "; path=" + ruta;
+//document.cookie = nuevaCookie;
+
+function crearCookie(nombre, valorCookie, dias) {
+  
+  if (dias) {
+    // el argumento dias es opcional
+    // si no especificamos la data cuando expira, se considera que la cookie dura solo una sesion y es destruido enseguida que la sesión acaba.
+    //var data = new Date();
+    // establece la data cuando la cookie expira en milisegundos
+    //data.setTime(data.getTime() + dias * 24 * 60 * 60 * 1000);
+    //El método toUTCString() convierte la data en una cadena de texto (string), utilizando la zona horaria UTC (Coordinated Universal Time).
+    var expira = data.toUTCString();
+    var ruta = "./";
+    // "/" representa el directorio raíz. O sea: la cookie es accesible en todo el dominio web si var ruta = "/subdirectorio" la cookie será accesible solo en este subdirectorio. 
+}
+  //var nuevaCookie = nombre + "=" + valorCookie + "; expires=" + expira + "; path=" + ruta;
+  var nuevaCookie = nombre + "=" + valorCookie + "; expires=" + expira;
+  document.cookie = nuevaCookie;
+  console.log(document.cookie);
+  console.log(expira)
+  console.log(nuevaCookie.split(';'))
 }
 
 //window.document.readyState
