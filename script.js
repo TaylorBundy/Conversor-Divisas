@@ -87,6 +87,8 @@ let btninvertir = document.getElementById("BtnInvertir");
 //definimos la variable etiqueta
 let Etiqueta = document.getElementById("Etiqueta");
 
+let tSegundos = '';
+
 //definimos la variable cookie
 //document.cookie = divApi2.value;
 //let galleta = document.cookie;
@@ -127,6 +129,20 @@ function SetFocus() {
   }
 }
 
+function tiempo() {
+  //tSegundos = 3;
+  if (divApi2.value.length > 30) {
+    tSegundos = 1000;
+  } else {
+    tSegundos = 5000;
+  }
+  setTimeout(function(){
+    if (divApi2.value != '') {
+      divBase.focus();
+    }
+  }, tSegundos);
+}
+
 //definimos la funcion para limpiar los inputs,
 //pasar el focus al input base
 //set checked radiobutton1
@@ -153,7 +169,7 @@ function Invertir() {
   if (divBase.value != '' || divConv.value != '') {
     var valor1 = divBase.value;
     var valor2 = divConv.value;
-    try {    
+    try {
       if (valor1 != valor2) {
         divBase.value = valor2;
         divConv.value = valor1;
@@ -184,16 +200,20 @@ function SetTitle() {
       Etiqueta.textContent = 'Api Verve'
       //ApiKeys()
     } else if (er.checked == true) {
-    document.title = 'Conversor de Divisas - Er Api'
-    Etiqueta.textContent = 'Er Api'
+      document.title = 'Conversor de Divisas - Er Api';
+      Etiqueta.textContent = 'Er Api';
+      divApi2.value = 'No necesita ApiKey';
     //ApiKeys()
     }
     if (divRes != '') {
       divRes.value = '';
     }
   }
-  finally {    
+  finally {
     ApiKeys();
+    //if (divApi2.value == '') {
+      //divApi2.focus();
+    //}
     if (divBase.value == '' || divConv.value == '' || divCant.value == '') {
       divBase.focus();
     } else if (divBase.value != '' || divConv.value != '' || divCant.value != '') {
@@ -230,7 +250,7 @@ function ApiKeys() {
       }
       if (ca1.checked == true) {
         //divApi.value = ApiKeysList[1]
-        //divApi2.value = ApiKeysList[1]        
+        //divApi2.value = ApiKeysList[1]
       }
       if (ca2.checked == true) {
         //divApi.value = ApiKeysList[1]
@@ -238,7 +258,7 @@ function ApiKeys() {
       }
       if (av.checked) {
         //divApi.value = ApiKeysList[2]
-        //divApi2.value = ApiKeysList[2]        
+        //divApi2.value = ApiKeysList[2]
       }
       if (er.checked) {
         //divApi.value = 'No necesita ApiKey',
@@ -246,32 +266,23 @@ function ApiKeys() {
       }
     }
     finally {
-      //let valorActual = divApi2.value;
-      //valorDespues = divApi2.value;
-      //console.log("valoractual: " + valorActual);
-      //console.log("valordespues: " + valorDespues);
       //var nombre_cookie = Etiqueta.textContent;
       nombre_cookie = Etiqueta.textContent;
       if (divApi2.value == '') {
-        valorCookie = ''
+        valorCookie = '';
       } else {
         //valorCookie = comprobarCookie(nombre_cookie)
         valorCookie = divApi2.value
       }
-      //valorCookie = divApi2.value;
-      //var data = new Date();
-      //data.setTime(data.getTime() + 365 * 24 * 60 * 60 * 1000);
-      //var expira = data.toUTCString();
-      //var ruta = "./";
       setTimeout(function(){
-        //document.cookie = divApi2.value;
-        //console.log(valorCookie);
-        //crearCookie(nombre_cookie, valorCookie, expira);
-        comprobarCookie(nombre_cookie)
+        if (window.localStorage) {
+          comprobarCookieLocal(nombre_cookie);
+        } else {
+          comprobarCookie(nombre_cookie);
+        }
         autoResize();
-        //alertCookie();
       }, 500);
-    }    
+    }
   }
 }
 
@@ -287,57 +298,53 @@ window.onload = function() {
   }
   finally {
     try {
-      ApiKeys();
+      //ApiKeys();
     }
     finally {
       setTimeout(function() {
-        comprobarCookie(nombre_cookie);
-      }, 1000);
+        nombre_cookie = Etiqueta.textContent;
+        if (window.localStorage) {
+          //nombre_cookie = Etiqueta.textContent;
+          comprobarCookieLocal(nombre_cookie);
+        } else {
+          comprobarCookie(nombre_cookie);
+        }
+        //console.log(localStorage.getItem(nombre_cookie));
+      }, 500);
     }
-    //setTimeout(function(){
-      //valorActual = divApi2.value;
-      //console.log(valorActual);
-    //}, 2000);
   }
 }
 
-//var nombre_cookie = "nombreUsuario";
-//var valorCookie = divApi2.value;
-//var data = new Date();
-//data.setTime(data.getTime() + 365 * 24 * 60 * 60 * 1000);
-//var expira = data.toUTCString();
-//var ruta = "./";
-
-//var nuevaCookie =  nombre_cookie + "=" + valorCookie + "; expires=" + expira + "; path=" + ruta;
-//document.cookie = nuevaCookie;
-
 function crearCookie(nombre, valorCookie, dias) {
-  
   if (dias) {
-    // el argumento dias es opcional
-    // si no especificamos la data cuando expira, se considera que la cookie dura solo una sesion y es destruido enseguida que la sesión acaba.
-    //var data = new Date();
-    // establece la data cuando la cookie expira en milisegundos
-    //data.setTime(data.getTime() + dias * 24 * 60 * 60 * 1000);
-    //El método toUTCString() convierte la data en una cadena de texto (string), utilizando la zona horaria UTC (Coordinated Universal Time).
     var expira = data.toUTCString();
     var ruta = "./";
-    // "/" representa el directorio raíz. O sea: la cookie es accesible en todo el dominio web si var ruta = "/subdirectorio" la cookie será accesible solo en este subdirectorio. 
-}
-  //var nuevaCookie = nombre + "=" + valorCookie + "; expires=" + expira + "; path=" + ruta;
-  var nuevaCookie = nombre + "=" + valorCookie + ";expires=" + expira
+  }
+  //var nuevaCookie = nombre + "=" + valorCookie + ";expires=" + expira
+  var nuevaCookie = nombre + "=" + valorCookie + ";" + "expires" + "=" + expira
   //document.cookie = nuevaCookie;
-  document.cookie = nombre + "=" + valorCookie + ";" + "expires" + "=" + expira
-  //var lola = document.cookie
-  //console.log(document.cookie.split(';'))
-  //console.log(lola)
-  //console.log(expira)
-  //console.log(nuevaCookie.split(';'))
+  //document.cookie = nombre + "=" + valorCookie + ";" + "expires" + "=" + expira
+  if (window.localStorage) {
+    try {
+      localStorage.setItem(nombre, valorCookie);
+    }
+    finally {
+      //console.log(localStorage.getItem(nombre));
+    }
+  } else {
+    document.cookie = nombre + "=" + valorCookie + ";" + "expires" + "=" + expira;
+  }
 }
 
 function obtenerCookie(clave) {
-  var name = clave + "=";
-  var ca = document.cookie.split(';');
+  if (window.localStorage) {
+    var ca = localStorage.getItem(clave);
+    var name = clave;
+  } else {
+    var name = clave + "=";
+    var ca = document.cookie.split(';');
+  }
+  console.log(name)
   for (var i = 0; i < ca.length; i++) {
       var c = ca[i];
       while (c.charAt(0) == ' ') c = c.substring(1);
@@ -346,14 +353,32 @@ function obtenerCookie(clave) {
   return "";
 }
 
+//creamos funcion para comprobar si existe la cookie
 function comprobarCookie(clave) {
   var clave = obtenerCookie(clave);
   if (clave != "") {
       // La cookie existe.
-      divApi2.value = clave 
-      //console.log(clave);
+      divApi2.value = clave
+      console.log(clave);
   } else {
-      // La cookie no existe. 
+      // La cookie no existe.
+  }
+}
+
+//creamos funcion para comprobar si existe la cookie en localstorage
+function comprobarCookieLocal(clave) {
+  if (divApi2.value != 'No necesita ApiKey') {
+    var clave = localStorage.getItem(clave);
+    if (clave != "") {
+      // La cookie existe.
+      if (clave != null) {
+        divApi2.value = clave
+      } else {
+        divApi2.focus();
+      }
+    } else {
+      return "";
+    }
   }
 }
 
@@ -450,7 +475,7 @@ async function Convertir() {
       }
       catch{
         print("Ha ocurrido un error")
-      }      
+      }
     }
     if (ca1.checked) {
       //apikey = "cur_live_UKoZAkSaznM6h9ynTnQdQlrunGJb6wIzHMlWs61q"
@@ -537,11 +562,11 @@ async function Convertir() {
       catch{
         print("Ha ocurrido un error")
       }
-    } 
+    }
     if (Etiqueta.textContent != '' || divApi2.value != '') {
       try {
         nombre_cookie = Etiqueta.textContent
-        valorCookie = divApi2.value   
+        valorCookie = divApi2.value
       }
       finally {
         crearCookie(nombre_cookie, valorCookie, expira)
@@ -584,7 +609,7 @@ function CompDivisa() {
   }
   var lector = new FileReader();
   lector.onload = function(e) {
-    var contenido = e.target.result;    
+    var contenido = e.target.result;
     lector.onloadend = () => leyendo(contenido);
     //return contenido
     //mostrarContenido(contenido);
@@ -691,7 +716,7 @@ function parseINI(data) {
       let match = line.match(rgx.section);
       for (let subSection of match[1].split(".")) {
         !section[subSection] && (section[subSection] = {});
-        section = section[subSection];        
+        section = section[subSection];
       }
       return;
     }
@@ -706,13 +731,13 @@ function leyendo (contents) {
   //console.log(contents);
   var cantidad = lineas2.length;
   //lineas.forEach(line => console.log(line))
-  
+
   //var iniObj = parseINIString(contents);
   var iniObj2 = parseINIString2(contents);
   //var iniObj3 = parseINI(contents);
-  
+
   //var lola = iniObj3;
-  
+
   //console.log(lola);
 
   //var jjj = '[API0]';
@@ -808,11 +833,16 @@ function autoResize() {
   if (textarea.value.length > 40) {
     textarea.style.height = 'auto';
     //textarea.style.height = divApi2.scrollHeight + 'px';
-    textarea.style.overflow = 'scroll';
+    if (screen.width >= 400) {
+      textarea.style.overflow = 'hidden';
+    } else {
+      textarea.style.overflow = 'scroll';
+      textarea.style.word-wrap;
+    }
     //console.log(textarea.value);
     // textarea.style.resize = 'none';
     //console.log(textarea.value.length);
-    
+
   } else {
     textarea.style.overflow = 'hidden';
     textarea.style.resize = 'none';
@@ -846,7 +876,7 @@ function getValue(val, id){
     return
   }
   //console.log(inputField2.value)
-  var data = autoComplete(simbolos3,val);    
+  var data = autoComplete(simbolos3,val);
   for (var i = 0; i < data.length; i++) {
     if (inputField2.value.length >= 2) {
       try {
