@@ -633,6 +633,13 @@ p {
     .botones1 {
         padding: 0;
     }
+    #DivAkey2 {
+        /* display: block; */
+        /* overflow: hidden; */
+        /* overflow: scroll; */
+        resize: none;
+        word-wrap: break-word;
+    }
 }
 
 /* @media only screen and (orientation: landscape) and (max-width: 400px) { */
