@@ -337,14 +337,14 @@ function crearCookie(nombre, valorCookie, dias) {
 }
 
 function obtenerCookie(clave) {
-  if (window.localStorage) {
-    var ca = localStorage.getItem(clave);
-    var name = clave;
-  } else {
+  //if (window.localStorage) {
+    //var ca = localStorage.getItem(clave);
+    //var name = clave;
+  //} else {
     var name = clave + "=";
     var ca = document.cookie.split(';');
-  }
-  console.log(name)
+  //}
+  //console.log(name)
   for (var i = 0; i < ca.length; i++) {
       var c = ca[i];
       while (c.charAt(0) == ' ') c = c.substring(1);
