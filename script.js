@@ -302,6 +302,10 @@ window.onload = function() {
     }
     finally {
       setTimeout(function() {
+        if (navigator.onLine) {
+          console.log('en linea');
+          console.log(location.href);
+        }
         nombre_cookie = Etiqueta.textContent;
         if (window.localStorage) {
           //nombre_cookie = Etiqueta.textContent;
