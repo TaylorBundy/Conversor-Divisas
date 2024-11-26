@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <link rel="shortcut icon" href="Imagenes/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href='style.css' />
+    <link rel="stylesheet" href='style.css'>
     <title>Conversor de Divisas</title>
 </head>
 <body>
@@ -13,30 +13,30 @@
             <div class="RadioClass">
                 <div class="Radios" id="ff1" onmouseover="Titulos()">
                     <label class="labels" id="ff2" title="" onmouseover="Titulos()">
-                        <input type="radio" class="radio" name="radios" id="ff" value="Fast Forex" checked="checked" onclick="SetTitle()" title="" onmouseover="Titulos()" />Fast Forex
+                        <input type="radio" class="radio" name="radios" id="ff" value="Fast Forex" checked="checked" onclick="SetTitle()" title="" onmouseover="Titulos()">Fast Forex
                     </label>
                 </div>
                 <div class="Radios" id="ca11" onmouseover="Titulos()">
                     <label class="labels" id="ca12" onmouseover="Titulos()">
-                        <input type="radio" class="radio" name="radios" id="ca1" value="Currency API" onclick="SetTitle()" onmouseover="Titulos()" />
+                        <input type="radio" class="radio" name="radios" id="ca1" value="Currency API" onclick="SetTitle()" onmouseover="Titulos()">
                         Currency API
                     </label>
                 </div>
                 <div class="Radios" id="ca21" onmouseover="Titulos()" style="visibility: collapse; display: none;">
                     <label class="labels" id="ca22" onmouseover="Titulos()">
-                        <input type="radio" class="radio" name="radios" id="ca2" value="Currency API-2" onclick="SetTitle()" onmouseover="Titulos()" />
+                        <input type="radio" class="radio" name="radios" id="ca2" value="Currency API-2" onclick="SetTitle()" onmouseover="Titulos()">
                         Currency API-2
                     </label>
                 </div>
                 <div class="Radios" id="av1" onmouseover="Titulos()">
                     <label class="labels" id="av2" onmouseover="Titulos()">
-                        <input type="radio" class="radio" name="radios" id="av" value="API Verve" onclick="SetTitle()" onmouseover="Titulos()" />
+                        <input type="radio" class="radio" name="radios" id="av" value="API Verve" onclick="SetTitle()" onmouseover="Titulos()">
                         API Verve
                     </label>
                 </div>
                 <div class="Radios" id="er1" onmouseover="Titulos()">
                     <label class="labels" id="er2" onmouseover="Titulos()">
-                        <input type="radio" class="radio" name="radios" id="er" value="ErAPI" onclick="SetTitle()" onmouseover="Titulos()" />
+                        <input type="radio" class="radio" name="radios" id="er" value="ErAPI" onclick="SetTitle()" onmouseover="Titulos()">
                         Er API
                     </label>
                 </div>
@@ -75,7 +75,7 @@
                 <div class="Inputs2" id="Api">
                     <p class="P1">API KEY: </p>
                     <!-- <div class="tooltip"> -->
-                        <input type="text" name="api" id="DivAkey" class="text2" onmouseover="Titulos()" style="visibility: collapse; display: none;" />
+                        <input type="text" name="api" id="DivAkey" class="text2" onmouseover="Titulos()" style="visibility: collapse; display: none;">
                         <textarea name="text" id="DivAkey2" class="text2" rows="1" cols="10" wrap="hard" onmouseover="Titulos()" style="overflow: hidden; resize: none;" onkeyup="tiempo()" > </textarea>
                         <!-- <span class="tooltiptext">Ingrese la API-KEY del servicio a utilizar!</span> -->
                     <!-- </div> -->
@@ -103,14 +103,14 @@
                 <div class="Inputs">
                     <p class="P">Cantidad: </p>
                     <!-- <div class="tooltip"> -->
-                        <input type="number" name="divCant" id="DivCant" pattern="/^-?\d+\.?\d*$/" class="text3" onKeyPress="if(this.value.length==7) return false; Javascript: if (event.keyCode==13) Convertir(), hideKeyboard();" onfocus="Mayus()" title="" onmouseover="Titulos()">
+                        <input type="number" name="divCant" id="DivCant"  class="text3" onKeyPress="if(this.value.length==7) return false; Javascript: if (event.keyCode==13) Convertir(), hideKeyboard();" onfocus="Mayus()" title="" onmouseover="Titulos()">
                         <!-- <span class="tooltiptext">Ingrese la Cantidad a Convertir!</span> -->
                     <!-- </div> -->
                 </div>
                 <div class="Inputs">
                     <p class="P">Resultado: </p>
                     <!-- <div class="tooltip"> -->
-                        <input type="text" id="DivRes" class="text"  value="" readonly="true" >
+                        <input type="text" id="DivRes" class="text"  value="" readonly='readonly' >
                         <!-- <span class="tooltiptext">Resultado!!!</span> -->
                     <!-- </div> -->
                 </div>
@@ -146,6 +146,7 @@
     </div>
     <!-- <script type="text/javascript" src="script.js"></script> -->
     <script src="script.js"></script>
+    <!-- <script src="script-ofuscado.js"></script> -->
     <!-- <script type="module" src="script.js"></script> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <!-- <script type="module" src="ini.js"></script> -->
