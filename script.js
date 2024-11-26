@@ -89,6 +89,7 @@ let Etiqueta = document.getElementById("Etiqueta");
 
 //definimos la variable para settimeout
 let tSegundos = '';
+let largo = '';
 
 //definimos la variable de la url local
 const urllocal = 'file:///C:/HTML/Proyectos/Conversor%20Divisas/index.html';
@@ -138,20 +139,40 @@ function SetFocus() {
 
 function tiempo() {
   //tSegundos = 3;
-  if (divApi2.value.length > 30) {
-    tSegundos = 1000;
-  } else {
-    if (plataforma.includes('Win')) {
-      tSegundos = 5000;
-    } else if (plataforma.includes('Android')) {
-      tSegundos = 15000;
-    }
+  if (Etiqueta.textContent == 'Api Verve') {
+    largo = 36;
   }
-  setTimeout(function(){
-    if (divApi2.value != '') {
-      divBase.focus();
+  if (Etiqueta.textContent == 'Fast Forex') {
+    largo = 28;
+  }
+  if (Etiqueta.textContent == 'Currency API') {
+    largo = 49;
+  }
+
+  //if (divApi2.value.length == largo) {
+    //tSegundos = 1000;
+  //} else {
+    if (plataforma.includes('Win')) {
+      if (divApi2.value.length === largo) {
+        tSegundos = 1000;
+      } else {
+        tSegundos = 5000;
+      }
+    } else if (plataforma.includes('Android')) {
+      if (divApi2.value.length === largo) {
+        tSegundos = 1000;
+      } else {
+        tSegundos = 15000;
+      }
     }
-  }, tSegundos);
+  //}
+  if (divApi2.value.length == largo) {
+    setTimeout(function(){
+      if (divApi2.value != '') {
+        divBase.focus();
+      }
+    }, tSegundos);
+  }
 }
 
 //definimos la funcion para limpiar los inputs,
