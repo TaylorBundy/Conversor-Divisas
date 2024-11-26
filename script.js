@@ -279,7 +279,8 @@ function ApiKeys() {
         valorCookie = divApi2.value
       }
       setTimeout(function(){
-        if (window.localStorage) {
+        var urlactual = location.href;
+        if (urlactual == urllocal) {
           comprobarCookieLocal(nombre_cookie);
         } else {
           comprobarCookie(nombre_cookie);
