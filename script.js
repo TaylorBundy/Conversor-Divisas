@@ -93,6 +93,9 @@ let tSegundos = '';
 //definimos la variable de la url local
 const urllocal = 'file:///C:/HTML/Proyectos/Conversor%20Divisas/index.html';
 
+//definimos constante plataforma
+const plataforma = navigator.userAgent;
+
 //definimos la variable cookie
 //document.cookie = divApi2.value;
 //let galleta = document.cookie;
@@ -138,7 +141,11 @@ function tiempo() {
   if (divApi2.value.length > 30) {
     tSegundos = 1000;
   } else {
-    tSegundos = 5000;
+    if (plataforma.includes('Win')) {
+      tSegundos = 5000;
+    } else if (plataforma.includes('Android')) {
+      tSegundos = 15000;
+    }
   }
   setTimeout(function(){
     if (divApi2.value != '') {
@@ -311,6 +318,13 @@ window.onload = function() {
           //console.log('en linea');
           //console.log(location.href);
         //}
+        if (plataforma.includes('Win')) {
+          console.log('Windows');
+          //alert(window.navigator.userAgent);
+        } else if (plataforma.includes('Android')) {
+          console.log('Android');
+          //alert(window.navigator.userAgent);
+        }
         nombre_cookie = Etiqueta.textContent;
         var urlactual = location.href;
         if (urllocal == urlactual) {
@@ -864,7 +878,7 @@ function autoResize() {
       textarea.style.overflow = 'hidden';
     } else {
       textarea.style.overflow = 'scroll';
-      textarea.style.word-wrap;
+      //textarea.style.word-wrap;
     }
     //console.log(textarea.value);
     // textarea.style.resize = 'none';
