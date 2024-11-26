@@ -377,6 +377,7 @@ function comprobarCookie(clave) {
   var clave = obtenerCookie(clave);
   if (clave != "") {
       // La cookie existe.
+      console.log(clave)
       if (clave != null) {
         divApi2.value = clave;
       } else {
@@ -394,6 +395,7 @@ function comprobarCookieLocal(clave) {
     var clave = localStorage.getItem(clave);
     if (clave != "") {
       // La cookie existe.
+      console.log(clave)
       if (clave != null) {
         divApi2.value = clave
       } else {
