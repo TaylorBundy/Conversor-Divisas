@@ -87,7 +87,11 @@ let btninvertir = document.getElementById("BtnInvertir");
 //definimos la variable etiqueta
 let Etiqueta = document.getElementById("Etiqueta");
 
+//definimos la variable para settimeout
 let tSegundos = '';
+
+//definimos la variable de la url local
+const urllocal = 'file:///C:/HTML/Proyectos/Conversor%20Divisas/index.html';
 
 //definimos la variable cookie
 //document.cookie = divApi2.value;
@@ -302,17 +306,25 @@ window.onload = function() {
     }
     finally {
       setTimeout(function() {
-        if (navigator.onLine) {
-          console.log('en linea');
-          console.log(location.href);
-        }
+        //if (navigator.onLine) {
+          //console.log('en linea');
+          //console.log(location.href);
+        //}
         nombre_cookie = Etiqueta.textContent;
-        if (window.localStorage) {
-          //nombre_cookie = Etiqueta.textContent;
+        var urlactual = location.href;
+        if (urllocal == urlactual) {
           comprobarCookieLocal(nombre_cookie);
+          console.log(urlactual);
         } else {
           comprobarCookie(nombre_cookie);
+          console.log(urlactual);
         }
+        //if (window.localStorage) {
+          //nombre_cookie = Etiqueta.textContent;
+          //comprobarCookieLocal(nombre_cookie);
+        //} else {
+          //comprobarCookie(nombre_cookie);
+        //}
         //console.log(localStorage.getItem(nombre_cookie));
       }, 500);
     }
