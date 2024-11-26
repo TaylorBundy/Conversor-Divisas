@@ -148,6 +148,9 @@ function tiempo() {
   if (Etiqueta.textContent == 'Currency API') {
     largo = 49;
   }
+  if (Etiqueta.textContent == 'Er Api') {
+    largo = 18;
+  }
 
   //if (divApi2.value.length == largo) {
     //tSegundos = 1000;
