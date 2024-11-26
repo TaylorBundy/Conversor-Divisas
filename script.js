@@ -315,10 +315,10 @@ window.onload = function() {
         var urlactual = location.href;
         if (urllocal == urlactual) {
           comprobarCookieLocal(nombre_cookie);
-          console.log(urlactual);
+          //console.log(urlactual);
         } else {
           comprobarCookie(nombre_cookie);
-          console.log(urlactual);
+          //console.log(urlactual);
         }
         //if (window.localStorage) {
           //nombre_cookie = Etiqueta.textContent;
@@ -341,7 +341,9 @@ function crearCookie(nombre, valorCookie, dias) {
   var nuevaCookie = nombre + "=" + valorCookie + ";" + "expires" + "=" + expira
   //document.cookie = nuevaCookie;
   //document.cookie = nombre + "=" + valorCookie + ";" + "expires" + "=" + expira
-  if (window.localStorage) {
+  var urlactual = location.href;
+  //if (window.localStorage) {
+  if (urlactual == urllocal) {
     try {
       localStorage.setItem(nombre, valorCookie);
     }
@@ -375,8 +377,12 @@ function comprobarCookie(clave) {
   var clave = obtenerCookie(clave);
   if (clave != "") {
       // La cookie existe.
-      divApi2.value = clave
-      console.log(clave);
+      if (clave != null) {
+        divApi2.value = clave;
+      } else {
+        divApi2.focus();
+      }
+      //console.log(clave);
   } else {
       // La cookie no existe.
   }
