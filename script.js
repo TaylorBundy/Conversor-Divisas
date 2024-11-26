@@ -386,6 +386,7 @@ function comprobarCookie(clave) {
       //console.log(clave);
   } else {
       // La cookie no existe.
+      divApi2.focus();
   }
 }
 
@@ -402,6 +403,7 @@ function comprobarCookieLocal(clave) {
         divApi2.focus();
       }
     } else {
+      divApi2.focus();
       return "";
     }
   }
