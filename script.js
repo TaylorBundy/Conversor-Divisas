@@ -11,7 +11,7 @@ const simbolos2 = [
   EUR = "€ ",
   GBP = "£ ",
   MXN = "MX$ "
-]
+];
 
 //creamos lista de simbolos monedas
 const simbolos= {
@@ -20,7 +20,15 @@ const simbolos= {
     "EUR" : "€ ",
     "GBP" : "£ ",
     "MXN" : "MX$ "
-}
+};
+
+const simbolos4 = {
+  "USD" : "USD",
+  "ARS" : "ARS",
+  "EUR" : "EUR",
+  "GBP" : "GBP",
+  "MXN" : "MXN"
+};
 
 //definimos las Api Keys
 var ApiKeysList = [
@@ -28,7 +36,7 @@ var ApiKeysList = [
   fastforex = "22b4888bca-b31a00af95-sna5fn",
   currencyapi = "cur_live_UKoZAkSaznM6h9ynTnQdQlrunGJb6wIzHMlWs61q",
   apiverve = "b5dde781-7fd0-4dde-80e2-f2939cc785b9"
-]
+];
 
 //definimos los titulos
 var TitulosList = [
@@ -44,7 +52,7 @@ var TitulosList = [
   btnLimpiar = "Limpiar contenidos de los inputs!",
   erapi = "Er Api",
   btnInvertir = "Invertir divisas!"
-]
+];
 
 //definimos variable de select
 const sel = document.getElementById("lang");
@@ -52,37 +60,49 @@ const opt = document.createElement("option");
 
 
 //definimos variables de los radiobuttons
-let ff1 = document.getElementById("ff1")
-let ca11 = document.getElementById("ca11")
-let ca21 = document.getElementById("ca21")
-let av1 = document.getElementById("av1")
-let er1 = document.getElementById("er1")
+let ff1 = document.getElementById("ff1");
+let ca11 = document.getElementById("ca11");
+let ca21 = document.getElementById("ca21");
+let av1 = document.getElementById("av1");
+let er1 = document.getElementById("er1");
 
 //definimos variables de los radiobuttons
-let ff2 = document.getElementById("ff2")
-let ca12 = document.getElementById("ca12")
-let ca22 = document.getElementById("ca22")
-let av2 = document.getElementById("av2")
-let er2 = document.getElementById("er2")
+let ff2 = document.getElementById("ff2");
+let ca12 = document.getElementById("ca12");
+let ca22 = document.getElementById("ca22");
+let av2 = document.getElementById("av2");
+let er2 = document.getElementById("er2");
 
 //definimos variables de los radiobuttons
-let ff = document.getElementById("ff")
-let ca1 = document.getElementById("ca1")
-let ca2 = document.getElementById("ca2")
-let av = document.getElementById("av")
-let er = document.getElementById("er")
+let ff = document.getElementById("ff");
+let ca1 = document.getElementById("ca1");
+let ca2 = document.getElementById("ca2");
+let av = document.getElementById("av");
+let er = document.getElementById("er");
 
 //definimos variables de los input
-let divBase = document.getElementById("DivBase")
-let divConv = document.getElementById("DivConv")
-let divCant = document.getElementById("DivCant")
-let divApi = document.getElementById("DivAkey")
-let divApi2 = document.getElementById("DivAkey2")
-let divRes = document.getElementById("DivRes")
+let divBase = document.getElementById("DivBase");
+let divConv = document.getElementById("DivConv");
+let divCant = document.getElementById("DivCant");
+let divApi = document.getElementById("DivAkey");
+let divApi2 = document.getElementById("DivAkey2");
+let divRes = document.getElementById("DivRes");
 
 let btnconvertir = document.getElementById("BtnConvertir");
 let btnlimpiar = document.getElementById("BtnLimpiar");
 let btninvertir = document.getElementById("BtnInvertir");
+
+let apikey = '';
+let url = '';
+let url1 = '';
+let url2 = '';
+let base = '';
+let cant = '';
+let conv = '';
+let div = '';
+let origen = '';
+let simbolo = '';
+
 
 //definimos la variable etiqueta
 let Etiqueta = document.getElementById("Etiqueta");
@@ -116,10 +136,10 @@ var valorDespues = '';
 
 //definimos la funcion valores, que obtiene el valor de cada input
 function Valores() {
-  divBase = divBase.value
-  divBase = divBase.toUpperCase()
-  divConv = divConv.value
-  divConv = divConv.toUpperCase()
+  divBase = divBase.value;
+  divBase = divBase.toUpperCase();
+  divConv = divConv.value;
+  divConv = divConv.toUpperCase();
   //console.log("divBase: ", divBase.value)
   console.log("divBase: ", divBase);
   //console.log("divConv: ", divConv.value)
@@ -128,17 +148,47 @@ function Valores() {
 }
 
 //definimos la funcion para pasar el focus al proximo input al llegar a 3 caracteres
-function SetFocus() {
-  if (divBase.value.length === 3 && divConv.value.length === 0) {
-    divConv.focus()
-  }
-  if (divConv.value.length === 3 && divBase.value.length === 3) {
-    divCant.focus()
-  }
+function SetFocus(id) {
+  const inputField2 = document.querySelector('#'+id);
+  setTimeout(function(){
+    if (inputField2.value.length === 3 && divConv.value.length === 0) {      
+      if (inputField2.value.toUpperCase() in simbolos4) {        
+        divConv.disabled = false;
+        divConv.style.background = '#d7e4f2';
+        divConv.style.border = '1px solid blue';
+        divConv.placeholder = '';
+        divConv.onmouseover = function() {divConv.style.background = 'black';};
+        divConv.onmouseout = function() {divConv.style.background = '#d7e4f2';};
+        divConv.focus();
+      } else {
+        divConv.disabled = true;
+        divConv.style.background = 'darkgrey';
+        divConv.style.border = '1px solid darkgrey';
+        divConv.placeholder = 'Divisa Base Invalida!';
+        inputField2.focus();
+      }      
+    }
+    if (divConv.value.length === 3 && divBase.value.length === 3) {      
+      if (divConv.value.toUpperCase() in simbolos4) {        
+        divCant.disabled = false;
+        divCant.style.background = '#d7e4f2';
+        divCant.style.border = '1px solid blue';
+        divCant.onmouseover = function() {divCant.style.background = 'black';};
+        divCant.onmouseout = function() {divCant.style.background = '#d7e4f2';};
+        divCant.placeholder = '';
+        divCant.focus();
+      } else {
+        divCant.disabled = true;
+        divCant.style.background = 'darkgrey';
+        divCant.style.border = '1px solid darkgrey';
+        divCant.placeholder = 'Divisa a Convertir Invalida!';
+        inputField2.focus();
+      }      
+    }
+  }, 500);  
 }
 
-function tiempo() {
-  //tSegundos = 3;
+function tiempo() {  
   if (Etiqueta.textContent == 'Api Verve') {
     largo = 36;
   }
@@ -152,23 +202,19 @@ function tiempo() {
     largo = 18;
   }
 
-  //if (divApi2.value.length == largo) {
-    //tSegundos = 1000;
-  //} else {
-    if (plataforma.includes('Win')) {
-      if (divApi2.value.length === largo) {
-        tSegundos = 1000;
-      } else {
-        tSegundos = 5000;
-      }
-    } else if (plataforma.includes('Android')) {
-      if (divApi2.value.length === largo) {
-        tSegundos = 1000;
-      } else {
-        tSegundos = 15000;
-      }
+  if (plataforma.includes('Win')) {
+    if (divApi2.value.length === largo) {
+      tSegundos = 1000;
+    } else {
+      tSegundos = 5000;
     }
-  //}
+  } else if (plataforma.includes('Android')) {
+    if (divApi2.value.length === largo) {
+      tSegundos = 1000;
+    } else {
+      tSegundos = 15000;
+    }
+  }
   if (divApi2.value.length == largo) {
     setTimeout(function(){
       if (divApi2.value != '') {
@@ -182,19 +228,25 @@ function tiempo() {
 //pasar el focus al input base
 //set checked radiobutton1
 function Limpiar() {
-  if (divBase.value != '' || divConv.value != '' || divCant.value != ''
-  || divRes.value != '' || divApi.value != '' || divApi2.value != '') {
-    divApi.value = '',
-    divApi2.value = '',
-    divBase.value = '',
-    divBase.focus(),
-    divConv.value = '',
-    divCant.value = '',
-    divRes.value = ''
+  if (divBase.value != '' ||
+  divConv.value != '' ||
+  divCant.value != '' ||
+  divRes.value != '' ||
+  divApi.value != '' ||
+  divApi2.value != '') {
+    divApi.value = '';
+    divApi2.value = '';
+    divBase.value = '';
+    divBase.focus();
+    divConv.value = '';
+    divCant.value = '';
+    divRes.value = '';
   }
   //si el radio button1 no esta checked, lo pasamos a true
   if (ff.checked != true) {
     ff.checked = true;
+    SetTitle();
+  } else {
     SetTitle();
   }
 }
@@ -222,33 +274,27 @@ function SetTitle() {
   try {
     if (ff.checked == true) {
       document.title = 'Conversor de Divisas - Fast Forex';
-      Etiqueta.textContent = 'Fast Forex';
-      //ApiKeys()
+      Etiqueta.textContent = 'Fast Forex';      
     } else if (ca1.checked == true) {
-      document.title = 'Conversor de Divisas - Currency API'
-      Etiqueta.textContent = 'Currency API'
+      document.title = 'Conversor de Divisas - Currency API';
+      Etiqueta.textContent = 'Currency API';
     } else if (ca2.checked == true) {
-      document.title = 'Conversor de Divisas - Currency API-2'
-      Etiqueta.textContent = 'Currency API-2'
+      document.title = 'Conversor de Divisas - Currency API-2';
+      Etiqueta.textContent = 'Currency API-2';
     } else if (av.checked == true) {
-      document.title = 'Conversor de Divisas - Api Verve'
-      Etiqueta.textContent = 'Api Verve'
-      //ApiKeys()
+      document.title = 'Conversor de Divisas - Api Verve';
+      Etiqueta.textContent = 'Api Verve';      
     } else if (er.checked == true) {
       document.title = 'Conversor de Divisas - Er Api';
       Etiqueta.textContent = 'Er Api';
-      divApi2.value = 'No necesita ApiKey';
-    //ApiKeys()
+      divApi2.value = 'No necesita ApiKey';    
     }
     if (divRes != '') {
       divRes.value = '';
     }
   }
-  finally {
-    ApiKeys();
-    //if (divApi2.value == '') {
-      //divApi2.focus();
-    //}
+  finally {    
+    ApiKeys();    
     if (divBase.value == '' || divConv.value == '' || divCant.value == '') {
       divBase.focus();
     } else if (divBase.value != '' || divConv.value != '' || divCant.value != '') {
@@ -259,8 +305,8 @@ function SetTitle() {
 
 //definimos la funcion para pasar los datos de los inputs a mayuscula
 function Mayus() {
-  s1 = divBase.value
-  s2 = divConv.value
+  s1 = divBase.value;
+  s2 = divConv.value;
   if (s1 != s1.toUpperCase()) {
     s1 = s1.replace(/[a-z]/g, char => char.toUpperCase());
     divBase.value = s1;
@@ -297,17 +343,15 @@ function ApiKeys() {
       }
       if (er.checked) {
         //divApi.value = 'No necesita ApiKey',
-        divApi2.value = 'No necesita ApiKey'
+        divApi2.value = 'No necesita ApiKey';
       }
     }
-    finally {
-      //var nombre_cookie = Etiqueta.textContent;
+    finally {      
       nombre_cookie = Etiqueta.textContent;
       if (divApi2.value == '') {
         valorCookie = '';
-      } else {
-        //valorCookie = comprobarCookie(nombre_cookie)
-        valorCookie = divApi2.value
+      } else {        
+        valorCookie = divApi2.value;
       }
       setTimeout(function(){
         var urlactual = location.href;
@@ -337,46 +381,25 @@ window.onload = function() {
       //ApiKeys();
     }
     finally {
-      setTimeout(function() {
-        //if (navigator.onLine) {
-          //console.log('en linea');
-          //console.log(location.href);
-        //}
-        if (plataforma.includes('Win')) {
-          console.log('Windows');
-          //alert(window.navigator.userAgent);
-        } else if (plataforma.includes('Android')) {
-          console.log('Android');
-          //alert(window.navigator.userAgent);
-        }
+      setTimeout(function() {        
         nombre_cookie = Etiqueta.textContent;
         var urlactual = location.href;
         if (urllocal == urlactual) {
-          comprobarCookieLocal(nombre_cookie);
-          //console.log(urlactual);
+          comprobarCookieLocal(nombre_cookie);          
         } else {
-          comprobarCookie(nombre_cookie);
-          //console.log(urlactual);
-        }
-        //if (window.localStorage) {
-          //nombre_cookie = Etiqueta.textContent;
-          //comprobarCookieLocal(nombre_cookie);
-        //} else {
-          //comprobarCookie(nombre_cookie);
-        //}
-        //console.log(localStorage.getItem(nombre_cookie));
+          comprobarCookie(nombre_cookie);          
+        }        
       }, 500);
     }
   }
-}
+};
 
 function crearCookie(nombre, valorCookie, dias) {
   if (dias) {
-    var expira = data.toUTCString();
-    var ruta = "./";
+    var expira = data.toUTCString();    
   }
   //var nuevaCookie = nombre + "=" + valorCookie + ";expires=" + expira
-  var nuevaCookie = nombre + "=" + valorCookie + ";" + "expires" + "=" + expira
+  var nuevaCookie = nombre + "=" + valorCookie + ";" + "expires" + "=" + expira;
   //document.cookie = nuevaCookie;
   //document.cookie = nombre + "=" + valorCookie + ";" + "expires" + "=" + expira
   var urlactual = location.href;
@@ -436,7 +459,7 @@ function comprobarCookieLocal(clave) {
       // La cookie existe.
       //console.log(clave)
       if (clave != null) {
-        divApi2.value = clave
+        divApi2.value = clave;
       } else {
         divApi2.focus();
       }
@@ -452,189 +475,189 @@ function comprobarCookieLocal(clave) {
 //definimos la funcion para poner titulos
 function Titulos() {
   if (divBase.onmouseover) {
-    divBase.title = TitulosList[5]
+    divBase.title = TitulosList[5];
   }
   if (divConv.onmouseover) {
-    divConv.title = TitulosList[6]
+    divConv.title = TitulosList[6];
   }
   if (divCant.onmouseover) {
-    divCant.title = TitulosList[7]
+    divCant.title = TitulosList[7];
   }
   if (divApi.onmouseover) {
-    divApi.title = TitulosList[4]
+    divApi.title = TitulosList[4];
   }
   if (divApi2.onmouseover) {
-    divApi2.title = TitulosList[4]
+    divApi2.title = TitulosList[4];
   }
   if (ff1.onmouseover || ff2.onmouseover || ff.onmouseover) {
-    ff1.title = TitulosList[0],
-    ff.title = TitulosList[0],
-    ff2.title = TitulosList[0]
+    ff1.title = TitulosList[0];
+    ff.title = TitulosList[0];
+    ff2.title = TitulosList[0];
   }
   if (ca1.onmouseover || ca12.onmouseover || ca11.onmouseover) {
-    ca1.title = TitulosList[1],
-    ca11.title = TitulosList[1],
-    ca12.title = TitulosList[1]
+    ca1.title = TitulosList[1];
+    ca11.title = TitulosList[1];
+    ca12.title = TitulosList[1];
   }
   if (ca2.onmouseover || ca21.onmouseover || ca22.onmouseover) {
-    ca2.title = TitulosList[2],
-    ca21.title = TitulosList[2],
-    ca22.title = TitulosList[2]
+    ca2.title = TitulosList[2];
+    ca21.title = TitulosList[2];
+    ca22.title = TitulosList[2];
   }
   if (av1.onmouseover || av2.onmouseover || av.onmouseover) {
-    av1.title = TitulosList[3],
-    av.title = TitulosList[3],
-    av2.title = TitulosList[3]
+    av1.title = TitulosList[3];
+    av.title = TitulosList[3];
+    av2.title = TitulosList[3];
   }
   if (er1.onmouseover || er2.onmouseover || er.onmouseover) {
-    er1.title = TitulosList[10],
-    er.title = TitulosList[10],
-    er2.title = TitulosList[10]
+    er1.title = TitulosList[10];
+    er.title = TitulosList[10];
+    er2.title = TitulosList[10];
   }
   if (btnconvertir.onmouseover) {
-    btnconvertir.title = TitulosList[8]
+    btnconvertir.title = TitulosList[8];
   }
   if (btnlimpiar.onmouseover) {
-    btnlimpiar.title = TitulosList[9]
+    btnlimpiar.title = TitulosList[9];
   }
   if (btninvertir.onmouseover) {
-    btninvertir.title = TitulosList[11]
+    btninvertir.title = TitulosList[11];
   }
 }
 
 //definimos funcion fastforex
 async function Convertir() {
-  apikey = divApi2.value
+  apikey = divApi2.value;
   try {
-    divRes.value = 'Calculando'
+    divRes.value = 'Calculando';
     await delay(2);
   }
   finally {
     if (ff.checked) {
-      url = "https://api.fastforex.io/fetch-one?from="
-      url1 = "&api_key=" + apikey
-      url2 = "https://api.fastforex.io/currencies?api_key="
+      url = "https://api.fastforex.io/fetch-one?from=";
+      url1 = "&api_key=" + apikey;
+      url2 = "https://api.fastforex.io/currencies?api_key=";
 
-      base = divBase.value
-      cant = divCant.value
-      div = divConv.value
-      origen = url + base + "&to=" + div + url1
+      base = divBase.value;
+      cant = divCant.value;
+      div = divConv.value;
+      origen = url + base + "&to=" + div + url1;
       if (div in simbolos) {
-        simbolo = simbolos[div]
+        simbolo = simbolos[div];
         //console.log(simbolo)
       }
       try{
-          const resp = await fetch(origen)
-          const resp2 = await fetch(url2 + apikey)
+          const resp = await fetch(origen);
+          const resp2 = await fetch(url2 + apikey);
           //console.log(resp.json())
           //console.log(base)
-          const data = await resp.json()
+          const data = await resp.json();
           //const data2 = await resp2.json()
           //const curren = await data2["currencies"]
-          const divisas = await data["result"]
-          const resultado = divisas[div] * cant
+          const divisas = await data["result"];
+          const resultado = divisas[div] * cant;
           //console.log(data2)
           //console.log(divisas[div])
           //console.log(resultado)
-          divRes.value = simbolo + resultado.toFixed(4)
+          divRes.value = simbolo + resultado.toFixed(4);
       }
       catch{
-        print("Ha ocurrido un error")
+        print("Ha ocurrido un error");
       }
     }
     if (ca1.checked) {
       //apikey = "cur_live_UKoZAkSaznM6h9ynTnQdQlrunGJb6wIzHMlWs61q"
       //url = "https://api.currencyapi.com/v3/latest?apikey=cur_live_UKoZAkSaznM6h9ynTnQdQlrunGJb6wIzHMlWs61q&currencies="
-      url = 'https://api.currencyapi.com/v3/latest?apikey=' + apikey + '&currencies='
-      url1 = "&base_currency="
-      base = divBase.value
-      cant = divCant.value
-      div = divConv.value
-      origen = url + div + url1 + base
+      url = 'https://api.currencyapi.com/v3/latest?apikey=' + apikey + '&currencies=';
+      url1 = "&base_currency=";
+      base = divBase.value;
+      cant = divCant.value;
+      div = divConv.value;
+      origen = url + div + url1 + base;
       if (div in simbolos) {
-        simbolo = simbolos[div]
+        simbolo = simbolos[div];
         //console.log(simbolo)
       }
       try{
-        const resp = await fetch(origen)
-        const data = await resp.json()
-        const datos = await data["data"]
-        const datos1 = await datos[div]
-        const divisas = await datos1["value"]
-        divRes.value = simbolo + divisas.toFixed(4)
+        const resp = await fetch(origen);
+        const data = await resp.json();
+        const datos = await data["data"];
+        const datos1 = await datos[div];
+        const divisas = await datos1["value"];
+        divRes.value = simbolo + divisas.toFixed(4);
         //console.log(divisas)
       }
       catch{
-        print("Ha ocurrido un error")
+        print("Ha ocurrido un error");
       }
     }
     if (av.checked) {
-      url = "https://api.apiverve.com/v1/currencyconverter?value="
-      base = divBase.value
-      cant = divCant.value
-      div = divConv.value
-      origen = url + cant + '&from=' + base + '&to=' + div
+      url = "https://api.apiverve.com/v1/currencyconverter?value=";
+      base = divBase.value;
+      cant = divCant.value;
+      div = divConv.value;
+      origen = url + cant + '&from=' + base + '&to=' + div;
       const options = {
         headers:{
           "x-api-key": apikey,
           "Accept": "application/json"
         }
-      }
+      };
       if (div in simbolos) {
-        simbolo = simbolos[div]
+        simbolo = simbolos[div];
         //console.log(simbolo)
       }
       try {
-        const resp = await fetch(origen, options)
-        const data = await resp.json()
-        const datos = await data["data"]
-        const divisas = await datos["convertedValue"]
-        divRes.value = simbolo + divisas.toFixed(4)
+        const resp = await fetch(origen, options);
+        const data = await resp.json();
+        const datos = await data["data"];
+        const divisas = await datos["convertedValue"];
+        divRes.value = simbolo + divisas.toFixed(4);
         //console.log(divisas)
       }
       catch {
-        print("Ha ocurrido un error")
+        print("Ha ocurrido un error");
       }
     }
     if (er.checked) {
       //apikey = "cur_live_UKoZAkSaznM6h9ynTnQdQlrunGJb6wIzHMlWs61q"
       //url = "https://api.currencyapi.com/v3/latest?apikey=cur_live_UKoZAkSaznM6h9ynTnQdQlrunGJb6wIzHMlWs61q&currencies="
-      url = 'https://open.er-api.com/v6/latest/' + divBase.value
-      url1 = "&base_currency="
-      base = divBase.value
-      cant = divCant.value
-      div = divConv.value
-      origen = url + div + url1 + base
+      url = 'https://open.er-api.com/v6/latest/' + divBase.value;
+      url1 = "&base_currency=";
+      base = divBase.value;
+      cant = divCant.value;
+      div = divConv.value;
+      origen = url + div + url1 + base;
       if (div in simbolos) {
-        simbolo = simbolos[div]
+        simbolo = simbolos[div];
         //console.log(simbolo)
       }
       try{
         //const resp = await fetch(origen)
-        const resp = await fetch(url)
-        const data = await resp.json()
+        const resp = await fetch(url);
+        const data = await resp.json();
         //console.log(data)
         //const datos = await data["data"]
-        const datos = await data["rates"]
+        const datos = await data["rates"];
         //console.log(datos)
-        const datos1 = await datos[div]
+        const datos1 = await datos[div];
         //console.log(datos1)
         //const divisas = await datos1["value"]
-        const divisas = cant * datos1
-        divRes.value = simbolo + divisas.toFixed(4)
+        const divisas = cant * datos1;
+        divRes.value = simbolo + divisas.toFixed(4);
         //console.log(divisas)
       }
       catch{
-        print("Ha ocurrido un error")
+        print("Ha ocurrido un error");
       }
     }
     if (Etiqueta.textContent != '' || divApi2.value != '') {
       try {
-        nombre_cookie = Etiqueta.textContent
-        valorCookie = divApi2.value
+        nombre_cookie = Etiqueta.textContent;
+        valorCookie = divApi2.value;
       }
       finally {
-        crearCookie(nombre_cookie, valorCookie, expira)
+        crearCookie(nombre_cookie, valorCookie, expira);
       }
     }
   }
@@ -645,52 +668,15 @@ function hideKeyboard() {
 }
 
 //creamos funcion para comprobar la divisa
-function CompDivisa() {
+/* function CompDivisa() {
   base = divBase.value;
   conv = divConv.value;
   if (simbolos2.includes(base)) {
     divBase.value = simbolos2[base];
   }
-  /* const pushElementToArray = (arr, el) => {
-    if(arr.includes(el)) {
-      console.log(`${el} ya existe en el array`);
-    } else {
-      arr.push(el);
-    }
-  } */
-}
-
-// window = new BrowserWindow({
-//   webPreferences: {
-//       nodeIntegration: true,
-//       contextIsolation: false
-//   }
-// });
-
-/* function leerArchivo(e) {
-  var archivo = e.target.files[0];
-  if (!archivo) {
-    return;
-  }
-  var lector = new FileReader();
-  lector.onload = function(e) {
-    var contenido = e.target.result;
-    lector.onloadend = () => leyendo(contenido);
-    //return contenido
-    //mostrarContenido(contenido);
-  };
-  lector.readAsText(archivo);
 } */
 
-/* function mostrarContenido(contenido) {
-  var elemento = document.getElementById('contenido-archivo');
-  elemento.innerHTML = contenido;
-} */
-
-/* document.getElementById('file-input')
-  .addEventListener('change', leerArchivo, false); */
-
-function parseINIString(data){
+/* function parseINIString(data){
   var regex = {
       section: /^\s*\[\s*([^\]]*)\s*\]\s*$/,
       param: /^\s*([^=]+?)\s*=\s*(.*?)\s*$/,
@@ -719,9 +705,9 @@ function parseINIString(data){
   });
   //console.log(value);
   return value;
-}
+} */
 
-function parseINIString2(data){
+/* function parseINIString2(data){
   var regex = {
       section: /^\s*\[\s*([^\]]*)\s*\]\s*$/,
       param: /^\s*([\w\.\-\_]+)\s*=\s*(.*?)\s*$/,
@@ -754,9 +740,9 @@ function parseINIString2(data){
   }
 
   return value;
-  }
+  } */
 
-function parseINI(data) {
+/* function parseINI(data) {
   let rgx = {
     section: /^\s*\[\s*([^\]]*)\s*\]\s*$/,
     param: /^\s*([^=]+?)\s*=\s*(.*?)\s*$/,
@@ -787,109 +773,36 @@ function parseINI(data) {
     }
   });
   return result;
-}
+} */
 
-function leyendo (contents) {
-  //let lineas = contents.split(/\n/);
-  //let lineas2 = contents.split(/\n/);
+/* function leyendo (contents) {
   let lineas2 = contents.split(/[\r\n]+/);
-  //console.log(contents);
   var cantidad = lineas2.length;
-  //lineas.forEach(line => console.log(line))
-
-  //var iniObj = parseINIString(contents);
   var iniObj2 = parseINIString2(contents);
-  //var iniObj3 = parseINI(contents);
-
-  //var lola = iniObj3;
-
-  //console.log(lola);
-
-  //var jjj = '[API0]';
-  //if (jjj in iniObj3) {
-    //console.log('si');
-  //}
-  for (x = 0; x < lineas2.length -1; x++){
-    //x = x / 3;
-    //console.log(x);
+  for (x = 0; x < lineas2.length -1; x++){    
     var api = 'API' + x;
     if (api in iniObj2) {
-      var apis = iniObj2[api];
-      //console.log(iniObj2[api]);
-      //console.log(apis);
-      //if ('API' in apis) {
-        //var Nitems = apis['API'];
-        //var pro = new Array(Nitems);
-        //console.log(apis.length);
-        //opt.value = Nitems;
-        //opt.text = Nitems;
-        //sel.Add(opt);
-        //AddItem(Nitems);
-        //console.log(apis['API']);
-      //}
+      var apis = iniObj2[api];      
     }
     if ('API' in apis) {
       var Nitems = apis['API'];
       var pro = new Array(Nitems);
-      console.log(Nitems);
-      //console.log(pro.length);
-    }
-    //AddItem(Nitems);
-    //console.log(Nitems);
-    //console.log(x);
-    //console.log(pro);
-  }
-  //if (api in iniObj2) {
-    //console.log(iniObj2[api]);
-  //}
-  //console.log(Nitems);
-  //console.log(pro);
-  //if ('API1' in iniObj2) {
-    //console.log('API1');
-  //}
-  //console.log(iniObj2);
-  //console.log(iniObj.API1);
-  //AddItem(Nitems);
-  console.log("cantidad: " + cantidad);
-  //if (iniObj)
-
-  // lineas2.forEach(line2 => {
-  //   iniObj = parseINIString(line2);
-  //   datos = iniObj;
-  //   //console.log(iniObj);
-  //   console.log(datos);
-  //   if (api in datos) {
-  //     datos1 = datos[api];
-  //     console.log(datos1);
-  //   }
-  // });
-  //console.log(datos);
-  //console.log(iniObj.Hello);
-  //console.log(iniObj.Section2);
-  //console.log(iniObj.Section2.Param2);
-  //console.log(iniObj.Section2['Hello Param3']);
-}
+      console.log(Nitems);      
+    }    
+  }  
+  console.log("cantidad: " + cantidad);  
+} */
 
 //creamos funcion para agregar items a la lista de apis
-function AddItem(items) {
-  //let lineas3 = items.split(/[\r\n]+/);
-  let lineas3 = items.split();
-  //opt.value = "3";
+/* function AddItem(items) {  
+  let lineas3 = items.split();  
   opt.value = items
-  opt.text = items;
-  //opt.value = items.length;
-  //opt.text = "Option: Value 3";
-  //opt.text = items;
-  //console.log(items);
-  //console.log(lineas3.length);
-  //sel.add(opt, sel.options[1]);
-  //sel.appendChild(opt);
+  opt.text = items;  
   sel.add(new Option(opt));
   sel.append(opt);
-}
+} */
 
 const textarea = document.querySelector("#DivAkey2");
-
 
 function autoResize() {
   //const valorActual = divApi2.value;
@@ -915,138 +828,44 @@ function autoResize() {
   }
 }
 
-/* function autoComplete(current) {
-  const simbolos3 = ['USD', "ARS", "EUR", "GBP", "MXN"];
-  //return simbolos3;
-  return simbolos3.filter((valor) => {
-    const valorMinuscula = valor
-    const ciudadMinuscula = valor
-    console.log(valorMinuscula.includes(ciudadMinuscula))
-    return valorMinuscula.includes(ciudadMinuscula)
-})
-} */
-
-const inputField = document.querySelector('#DivBase')
-const result = document.querySelector('.output')
+//const inputField = document.querySelector('#DivBase')
+const result = document.querySelector('.output');
 //const sugerencias = document.querySelector('.sugerencias')
-const simbolos3 = ['USD', "ARS", "EUR", "GBP", "MXN"]
+const simbolos3 = ['USD', "ARS", "EUR", "GBP", "MXN"];
 
-function autoComplete(simbolos3, val) {
+function autoComplete(simbolos3, val, id) {
+  const hola = document.querySelector('#'+id);
+  const coco = simbolos3.filter(e => e.toLowerCase().includes(val.toLowerCase()));
+  if (val != coco) {
+    hola.style.color = 'red';
+  } else {
+    hola.style.color = '#8202dd';
+  }
   return simbolos3.filter(e => e.toLowerCase().includes(val.toLowerCase()));
+  //return simbolos3.filter(e => e.includes(val));
 }
+
 function getValue(val, id){
-  const inputField2 = document.querySelector('#'+id)
+  const inputField2 = document.querySelector('#'+id);
   if(!val){
     result.innerHTML='';
     return
   }
-  //console.log(inputField2.value)
-  var data = autoComplete(simbolos3,val);
+  var data = autoComplete(simbolos3,val, id);
   for (var i = 0; i < data.length; i++) {
-    if (inputField2.value.length >= 2) {
+    if (inputField2.value.length === 3) {
       try {
-        inputField2.value = data[i];
+        var valorfinal = data[i];
+        if (val.toUpperCase() === valorfinal) {
+          inputField2.value = data[i];
+          inputField2.style.color = '#8202dd';
+        } //else {
+          //inputField2.style.color = 'red';
+        //}
       }
       finally {
-        SetFocus()
+        //
       }
     }
   }
 }
-
-//inputField.addEventListener('input', autoComplete);
-/* inputField.addEventListener('input', ({ target }) => {
-  const datosDelCampo = target.value
-  if(datosDelCampo.length) {
-    const autoCompleteValores = autoComplete(datosDelCampo)
-     sugerencias.innerHTML = `
-       ${autoCompleteValores.map((value) => {
-           return (
-                  `<li>${value}</li>`
-                 )
-         }).join('')}
-    `}
-}) */
-
-
-
-//textarea.addEventListener('change', autoResize, false);
-//document.getElementById("DivAkey2")
-  //.addEventListener("change", autoResize, false);
-
-//document.getElementById('DivAkey2')
-  //.addEventListener('input', autoResize, false);
-
-/* function creaArchivo() {
-  var ini = new Ini();
-
-  ini.parse([
-    'prop = value',
-    '[sect]',
-    'foo = bar',
-    'baz = yes',
-    '[sect "label"]',
-    'foo = "bar"',
-    'baz = off'
-  ].join('\n'));
-
-  ini.get('prop')           // value
-  ini.get('sect.foo')       // bar
-  ini.get('sect:label.baz') // false
-
-  ini.toObject()            // {prop: value, sect: { foo: bar, baz: true } ...}
-  ini.toString()            // Generates back the ini file
-
-  // It's also to modify or build an ini file programatically
-  var sect = ini.section('newsect', 'mylabel');
-  sect.comment('My comment');
-  sect.property('foo', 'bar');
-} */
-
-// function prueba(fun) {
-//   var funciones = {};
-//   funciones.ale1 = function() {
-//     alert('1');
-//   };
-
-//   funciones.ale2 = function() {
-//     alert('2');
-//   };
-
-//   //llamada usando reflexion donde fun es el string del nombre del metodo
-//   return funciones[fun]();
-// }
-
-//const canvas = document.querySelector("InputContainer")
-
-//canvas.width = innerWidth
-//canvas.height = innerHeight
-
-//Inputs.width = innerWidth
-//Inputs.height = innerHeight
-
-//ff = document.getElementById("ff");
-//ca1 = document.getElementById("ca1");
-//ca2 = document.getElementById("ca2");
-//av = document.getElementById("av");
-
-/* function check() {
-    //if (document.getElementById("ff").checked == true)
-    if (ff.checked == true) {
-        ca1.checked = false
-        ca2.checked = false
-        av.checked = false
-    } else if (ca1.checked == true) {
-        ff.checked = false
-        ca2.checked = false
-        av.checked = false
-    } else if (ca2.checked == true) {
-        ff.checked = false
-        ca1.checked = false
-        av.checked = false
-    }
-
-    //if (document.getElementById("ff").ch)
-        //ca1.check = false
-    //document.getElementById("ca1").checked = true
-} */
