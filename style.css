@@ -330,6 +330,22 @@ label:has(input[type="radio"]:checked) {
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
 }
 
+#DivAkey {
+    background-color:  grey;
+    color: #fff;
+    width: 250px;
+    left: 50%;
+    bottom: -80%;
+    /* visibility: visible; */
+    /* position: absolute; */
+    /* display: inline-flex; */
+}
+
+/* #DivAkey:hover > :not(:hover) {
+    visibility: collapse;   
+    display: none; 
+} */
+
 .text2 {
     all: unset;
     /* color: #fff; */

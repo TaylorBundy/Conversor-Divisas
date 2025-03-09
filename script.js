@@ -5,44 +5,54 @@
 
 //var parser = require('ini-parser')
 
+//creamos lista de simbolos monedas
+/* const simbolos= {
+  "USD" : "U$D ",
+  "ARS" : "$ ",
+  "EUR" : "€ ",
+  "GBP" : "£ ",
+  "MXN" : "MX$ "
+}; */
+
 const simbolos2 = [
   USD = "U$D ",
   ARS = "$ ",
+  COP = "$ ",
   EUR = "€ ",
   GBP = "£ ",
   MXN = "MX$ "
 ];
 
-//creamos lista de simbolos monedas
-const simbolos= {
-    "USD" : "U$D ",
-    "ARS" : "$ ",
-    "EUR" : "€ ",
-    "GBP" : "£ ",
-    "MXN" : "MX$ "
-};
+/* const simbolos3 = [
+  'USD',
+  'ARS',
+  'EUR',
+  'GBP',
+  'MXN'
+]; */
 
 const simbolos4 = {
   "USD" : "USD",
   "ARS" : "ARS",
   "EUR" : "EUR",
   "GBP" : "GBP",
+  "COP" : "COP",
   "MXN" : "MXN"
 };
 
-//definimos las Api Keys
+/* //definimos las Api Keys
 var ApiKeysList = [
   //fastforex = "42e1f6bd1c-cab594ea40-slw03x",
   fastforex = "22b4888bca-b31a00af95-sna5fn",
   currencyapi = "cur_live_UKoZAkSaznM6h9ynTnQdQlrunGJb6wIzHMlWs61q",
   apiverve = "b5dde781-7fd0-4dde-80e2-f2939cc785b9"
-];
+]; */
 
 //definimos los titulos
 var TitulosList = [
   fastfore = "Fast Forex",
   currencyapi = "Currency Api",
-  currencyapi2 = "Currency Api-2",
+  currencyapi2 = "Currency Layer",
   apiverve = "Api Verve",
   aapikey = "Ingrese la API-KEY del servicio a utilizar!",
   divbase = "Ingrese la Divisa Base que desea Convertir!",
@@ -65,6 +75,7 @@ let ca11 = document.getElementById("ca11");
 let ca21 = document.getElementById("ca21");
 let av1 = document.getElementById("av1");
 let er1 = document.getElementById("er1");
+let cr1 = document.getElementById("cr1");
 
 //definimos variables de los radiobuttons
 let ff2 = document.getElementById("ff2");
@@ -72,6 +83,7 @@ let ca12 = document.getElementById("ca12");
 let ca22 = document.getElementById("ca22");
 let av2 = document.getElementById("av2");
 let er2 = document.getElementById("er2");
+let cr2 = document.getElementById("cr2");
 
 //definimos variables de los radiobuttons
 let ff = document.getElementById("ff");
@@ -79,6 +91,7 @@ let ca1 = document.getElementById("ca1");
 let ca2 = document.getElementById("ca2");
 let av = document.getElementById("av");
 let er = document.getElementById("er");
+let cr = document.getElementById("cr");
 
 //definimos variables de los input
 let divBase = document.getElementById("DivBase");
@@ -92,6 +105,9 @@ let btnconvertir = document.getElementById("BtnConvertir");
 let btnlimpiar = document.getElementById("BtnLimpiar");
 let btninvertir = document.getElementById("BtnInvertir");
 
+const textarea = document.querySelector("#DivAkey2");
+const result = document.querySelector('#DivAkey');
+
 let apikey = '';
 let url = '';
 let url1 = '';
@@ -102,6 +118,12 @@ let conv = '';
 let div = '';
 let origen = '';
 let simbolo = '';
+let divisas = '';
+let resp = '';
+let data = '';
+let datos = '';
+let datos1 = '';
+let resultado = '';
 
 
 //definimos la variable etiqueta
@@ -120,19 +142,41 @@ const plataforma = navigator.userAgent;
 //definimos la variable cookie
 //document.cookie = divApi2.value;
 //let galleta = document.cookie;
-var data = new Date();
-data.setTime(data.getTime() + 365 * 24 * 60 * 60 * 1000);
-var expira = data.toUTCString();
+var data2 = new Date();
+data2.setTime(data2.getTime() + 365 * 24 * 60 * 60 * 1000);
+var expira = data2.toUTCString();
 let nombre_cookie = '';
 let valorCookie = '';
 
 var valorActual = '';
 var valorDespues = '';
 
-//function alertCookie() {
-  //console.log(document.cookie);
-  //alert(document.cookie); // visualizar: nombre=oeschger;comida favorita=tripa
-//}
+//cuando termina de cargar la pagina, seteamos el focus en el div base,
+//luego llamamos a la funcion "ApiKeys" para cargar las apikeys
+window.onload = function() {
+  try {
+    divBase.focus();
+    agregaritem();
+  }
+  finally {
+    try {
+      //ApiKeys();
+    }
+    finally {
+      setTimeout(function() {
+        nombre_cookie = Etiqueta.textContent;
+        var urlactual = location.href;
+        if (urllocal == urlactual) {
+          comprobarCookieLocal(nombre_cookie);
+          //var puto = comprobarCookieLocal(nombre_cookie);
+          //console.log(puto);
+        } else {
+          comprobarCookie(nombre_cookie);
+        }
+      }, 500);
+    }
+  }
+};
 
 //definimos la funcion valores, que obtiene el valor de cada input
 function Valores() {
@@ -151,8 +195,8 @@ function Valores() {
 function SetFocus(id) {
   const inputField2 = document.querySelector('#'+id);
   setTimeout(function(){
-    if (inputField2.value.length === 3 && divConv.value.length === 0) {      
-      if (inputField2.value.toUpperCase() in simbolos4) {        
+    if (inputField2.value.length === 3 && divConv.value.length === 0) {
+      if (inputField2.value.toUpperCase() in simbolos4) {
         divConv.disabled = false;
         divConv.style.background = '#d7e4f2';
         divConv.style.border = '1px solid blue';
@@ -166,10 +210,10 @@ function SetFocus(id) {
         divConv.style.border = '1px solid darkgrey';
         divConv.placeholder = 'Divisa Base Invalida!';
         inputField2.focus();
-      }      
+      }
     }
-    if (divConv.value.length === 3 && divBase.value.length === 3) {      
-      if (divConv.value.toUpperCase() in simbolos4) {        
+    if (divConv.value.length === 3 && divBase.value.length === 3) {
+      if (divConv.value.toUpperCase() in simbolos4) {
         divCant.disabled = false;
         divCant.style.background = '#d7e4f2';
         divCant.style.border = '1px solid blue';
@@ -183,12 +227,12 @@ function SetFocus(id) {
         divCant.style.border = '1px solid darkgrey';
         divCant.placeholder = 'Divisa a Convertir Invalida!';
         inputField2.focus();
-      }      
+      }
     }
-  }, 500);  
+  }, 100);
 }
 
-function tiempo() {  
+function tiempo() {
   if (Etiqueta.textContent == 'Api Verve') {
     largo = 36;
   }
@@ -274,7 +318,7 @@ function SetTitle() {
   try {
     if (ff.checked == true) {
       document.title = 'Conversor de Divisas - Fast Forex';
-      Etiqueta.textContent = 'Fast Forex';      
+      Etiqueta.textContent = 'Fast Forex';
     } else if (ca1.checked == true) {
       document.title = 'Conversor de Divisas - Currency API';
       Etiqueta.textContent = 'Currency API';
@@ -283,21 +327,27 @@ function SetTitle() {
       Etiqueta.textContent = 'Currency API-2';
     } else if (av.checked == true) {
       document.title = 'Conversor de Divisas - Api Verve';
-      Etiqueta.textContent = 'Api Verve';      
+      Etiqueta.textContent = 'Api Verve';
     } else if (er.checked == true) {
       document.title = 'Conversor de Divisas - Er Api';
       Etiqueta.textContent = 'Er Api';
-      divApi2.value = 'No necesita ApiKey';    
+      divApi2.value = 'No necesita ApiKey';
+    } else if (cr.checked == true) {
+      document.title = 'Conversor de Divisas - Currency Layer';
+      Etiqueta.textContent = 'Currency Layer';
+      //divApi2.value = 'No necesita ApiKey';
     }
     if (divRes != '') {
       divRes.value = '';
     }
   }
-  finally {    
-    ApiKeys();    
-    if (divBase.value == '' || divConv.value == '' || divCant.value == '') {
+  finally {
+    ApiKeys();
+    if (divBase.value == '' && divConv.value == '' && divCant.value == '') {
       divBase.focus();
-    } else if (divBase.value != '' || divConv.value != '' || divCant.value != '') {
+    } else if (divBase.value != '' && divConv.value == '') {
+      divConv.focus();
+    } else if (divBase.value != '' && divConv != '') {
       divCant.focus();
     }
   }
@@ -346,11 +396,11 @@ function ApiKeys() {
         divApi2.value = 'No necesita ApiKey';
       }
     }
-    finally {      
+    finally {
       nombre_cookie = Etiqueta.textContent;
       if (divApi2.value == '') {
         valorCookie = '';
-      } else {        
+      } else {
         valorCookie = divApi2.value;
       }
       setTimeout(function(){
@@ -361,7 +411,7 @@ function ApiKeys() {
           comprobarCookie(nombre_cookie);
         }
         autoResize();
-      }, 500);
+      }, 100);
     }
   }
 }
@@ -370,33 +420,11 @@ const delay = (s) => {
   return new Promise((resolve) => setTimeout(resolve, s * 1000));
 };
 
-//cuando termina de cargar la pagina, seteamos el focus en el div base,
-//luego llamamos a la funcion "ApiKeys" para cargar las apikeys
-window.onload = function() {
-  try {
-    divBase.focus();
-  }
-  finally {
-    try {
-      //ApiKeys();
-    }
-    finally {
-      setTimeout(function() {        
-        nombre_cookie = Etiqueta.textContent;
-        var urlactual = location.href;
-        if (urllocal == urlactual) {
-          comprobarCookieLocal(nombre_cookie);          
-        } else {
-          comprobarCookie(nombre_cookie);          
-        }        
-      }, 500);
-    }
-  }
-};
+
 
 function crearCookie(nombre, valorCookie, dias) {
   if (dias) {
-    var expira = data.toUTCString();    
+    var expira = data2.toUTCString();
   }
   //var nuevaCookie = nombre + "=" + valorCookie + ";expires=" + expira
   var nuevaCookie = nombre + "=" + valorCookie + ";" + "expires" + "=" + expira;
@@ -499,10 +527,10 @@ function Titulos() {
     ca11.title = TitulosList[1];
     ca12.title = TitulosList[1];
   }
-  if (ca2.onmouseover || ca21.onmouseover || ca22.onmouseover) {
-    ca2.title = TitulosList[2];
-    ca21.title = TitulosList[2];
-    ca22.title = TitulosList[2];
+  if (cr2.onmouseover || cr1.onmouseover || cr.onmouseover) {
+    cr2.title = TitulosList[2];
+    cr1.title = TitulosList[2];
+    cr.title = TitulosList[2];
   }
   if (av1.onmouseover || av2.onmouseover || av.onmouseover) {
     av1.title = TitulosList[3];
@@ -547,19 +575,20 @@ async function Convertir() {
         //console.log(simbolo)
       }
       try{
-          const resp = await fetch(origen);
+          resp = await fetch(origen);
           const resp2 = await fetch(url2 + apikey);
           //console.log(resp.json())
           //console.log(base)
-          const data = await resp.json();
+          data = await resp.json();
           //const data2 = await resp2.json()
           //const curren = await data2["currencies"]
-          const divisas = await data["result"];
-          const resultado = divisas[div] * cant;
+          divisas = await data["result"];
+          resultado = divisas[div] * cant;
           //console.log(data2)
           //console.log(divisas[div])
           //console.log(resultado)
           divRes.value = simbolo + resultado.toFixed(4);
+          holaaaa();
       }
       catch{
         print("Ha ocurrido un error");
@@ -579,16 +608,43 @@ async function Convertir() {
         //console.log(simbolo)
       }
       try{
-        const resp = await fetch(origen);
-        const data = await resp.json();
-        const datos = await data["data"];
-        const datos1 = await datos[div];
-        const divisas = await datos1["value"];
+        resp = await fetch(origen);
+        data = await resp.json();
+        datos = await data["data"];
+        datos1 = await datos[div];
+        divisas = await datos1["value"];
         divRes.value = simbolo + divisas.toFixed(4);
         //console.log(divisas)
       }
       catch{
         print("Ha ocurrido un error");
+      }
+    }
+    if (cr.checked) {
+      url = 'https://api.currencylayer.com/convert?access_key=' + apikey;
+      base = divBase.value;
+      cant = divCant.value;
+      div = divConv.value;
+      origen = url + '&from=' + base + '&to=' + div + '&amount=' + cant;
+      if (div in simbolos) {
+        simbolo = simbolos[div];
+        //console.log(simbolo)
+      }
+      try{
+        resp = await fetch(origen);
+        //console.log(await resp);
+        data = await resp.json();
+        datos = await data["result"];
+        //console.log(datos);
+        divisas = await datos;
+        //console.log(divisas);
+        //const datos1 = await datos[div];
+        //const divisas = await datos1["value"];
+        divRes.value = simbolo + divisas.toFixed(5);
+        //console.log(divisas)
+      }
+      catch{
+        console.log("Ha ocurrido un error");
       }
     }
     if (av.checked) {
@@ -608,10 +664,10 @@ async function Convertir() {
         //console.log(simbolo)
       }
       try {
-        const resp = await fetch(origen, options);
-        const data = await resp.json();
-        const datos = await data["data"];
-        const divisas = await datos["convertedValue"];
+        resp = await fetch(origen, options);
+        data = await resp.json();
+        datos = await data["data"];
+        divisas = await datos["convertedValue"];
         divRes.value = simbolo + divisas.toFixed(4);
         //console.log(divisas)
       }
@@ -634,16 +690,16 @@ async function Convertir() {
       }
       try{
         //const resp = await fetch(origen)
-        const resp = await fetch(url);
-        const data = await resp.json();
+        resp = await fetch(url);
+        data = await resp.json();
         //console.log(data)
         //const datos = await data["data"]
-        const datos = await data["rates"];
+        datos = await data["rates"];
         //console.log(datos)
-        const datos1 = await datos[div];
+        datos1 = await datos[div];
         //console.log(datos1)
         //const divisas = await datos1["value"]
-        const divisas = cant * datos1;
+        divisas = cant * datos1;
         divRes.value = simbolo + divisas.toFixed(4);
         //console.log(divisas)
       }
@@ -663,8 +719,65 @@ async function Convertir() {
   }
 }
 
+//creamos la funcion para ocular el teclado del mobil cuando ejecutamos la funcion para convertir
 function hideKeyboard() {
   document.activeElement.blur();
+}
+
+//creamo la funcion que redimenciona y ajusta el "textarea" cuando se ejecuta desde un mobil
+function autoResize() {
+  if (textarea.value.length > 40) {
+    textarea.style.height = 'auto';
+    if (screen.width >= 400) {
+      textarea.style.overflow = 'hidden';
+    } else {
+      textarea.style.overflow = 'scroll';
+    }
+  } else {
+    textarea.style.overflow = 'hidden';
+    textarea.style.resize = 'none';
+  }
+}
+
+//creamo la funcion "autocomplete" encargada de auto completar la divisa base y a convertir si existe en la lista
+function autoComplete(simbolos3, val, id) {
+  const hola = document.querySelector('#'+id);
+  const coco = simbolos3.filter(e => e.toLowerCase().includes(val.toLowerCase()));
+  if (val != coco) {
+    hola.style.color = 'red';
+  } else {
+    hola.style.color = '#8202dd';
+  }
+  return simbolos3.filter(e => e.toLowerCase().includes(val.toLowerCase()));
+  //return simbolos3.filter(e => e.includes(val));
+}
+
+//creamos la funcion que obtiene el valor de los inputs divisa base y divisa a convertir
+//para comprobar si el valor existe en la lista mediante la funcion autocomplete
+//para rrelenar el campop
+function getValue(val, id){
+  const inputField2 = document.querySelector('#'+id);
+  if(!val){
+    result.innerHTML='';
+    return
+  }
+  var data = autoComplete(simbolos3,val, id);
+  for (var i = 0; i < data.length; i++) {
+    if (inputField2.value.length === 3) {
+      try {
+        var valorfinal = data[i];
+        if (val.toUpperCase() === valorfinal) {
+          inputField2.value = data[i];
+          inputField2.style.color = '#8202dd';
+        } //else {
+          //inputField2.style.color = 'red';
+        //}
+      }
+      finally {
+        //
+      }
+    }
+  }
 }
 
 //creamos funcion para comprobar la divisa
@@ -779,93 +892,25 @@ function hideKeyboard() {
   let lineas2 = contents.split(/[\r\n]+/);
   var cantidad = lineas2.length;
   var iniObj2 = parseINIString2(contents);
-  for (x = 0; x < lineas2.length -1; x++){    
+  for (x = 0; x < lineas2.length -1; x++){
     var api = 'API' + x;
     if (api in iniObj2) {
-      var apis = iniObj2[api];      
+      var apis = iniObj2[api];
     }
     if ('API' in apis) {
       var Nitems = apis['API'];
       var pro = new Array(Nitems);
-      console.log(Nitems);      
-    }    
-  }  
-  console.log("cantidad: " + cantidad);  
+      console.log(Nitems);
+    }
+  }
+  console.log("cantidad: " + cantidad);
 } */
 
 //creamos funcion para agregar items a la lista de apis
-/* function AddItem(items) {  
-  let lineas3 = items.split();  
+/* function AddItem(items) {
+  let lineas3 = items.split();
   opt.value = items
-  opt.text = items;  
+  opt.text = items;
   sel.add(new Option(opt));
   sel.append(opt);
 } */
-
-const textarea = document.querySelector("#DivAkey2");
-
-function autoResize() {
-  //const valorActual = divApi2.value;
-  //valorActual = divApi2.value;
-  //console.log(valorActual);
-  if (textarea.value.length > 40) {
-    textarea.style.height = 'auto';
-    //textarea.style.height = divApi2.scrollHeight + 'px';
-    if (screen.width >= 400) {
-      textarea.style.overflow = 'hidden';
-    } else {
-      textarea.style.overflow = 'scroll';
-      //textarea.style.word-wrap;
-    }
-    //console.log(textarea.value);
-    // textarea.style.resize = 'none';
-    //console.log(textarea.value.length);
-
-  } else {
-    textarea.style.overflow = 'hidden';
-    textarea.style.resize = 'none';
-    //console.log(textarea.value.length);
-  }
-}
-
-//const inputField = document.querySelector('#DivBase')
-const result = document.querySelector('.output');
-//const sugerencias = document.querySelector('.sugerencias')
-const simbolos3 = ['USD', "ARS", "EUR", "GBP", "MXN"];
-
-function autoComplete(simbolos3, val, id) {
-  const hola = document.querySelector('#'+id);
-  const coco = simbolos3.filter(e => e.toLowerCase().includes(val.toLowerCase()));
-  if (val != coco) {
-    hola.style.color = 'red';
-  } else {
-    hola.style.color = '#8202dd';
-  }
-  return simbolos3.filter(e => e.toLowerCase().includes(val.toLowerCase()));
-  //return simbolos3.filter(e => e.includes(val));
-}
-
-function getValue(val, id){
-  const inputField2 = document.querySelector('#'+id);
-  if(!val){
-    result.innerHTML='';
-    return
-  }
-  var data = autoComplete(simbolos3,val, id);
-  for (var i = 0; i < data.length; i++) {
-    if (inputField2.value.length === 3) {
-      try {
-        var valorfinal = data[i];
-        if (val.toUpperCase() === valorfinal) {
-          inputField2.value = data[i];
-          inputField2.style.color = '#8202dd';
-        } //else {
-          //inputField2.style.color = 'red';
-        //}
-      }
-      finally {
-        //
-      }
-    }
-  }
-}

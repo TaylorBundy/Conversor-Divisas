@@ -40,6 +40,12 @@
                         Er API
                     </label>
                 </div>
+                <div class="Radios" id="cr1" onmouseover="Titulos()">
+                    <label class="labels" id="cr2" onmouseover="Titulos()">
+                        <input type="radio" class="radio" name="radios" id="cr" value="ErAPI" onclick="SetTitle()" onmouseover="Titulos()">
+                        Currency Layer
+                    </label>
+                </div>
             </div>
         </div>
         <!-- <div class="InputContainer2"> -->
@@ -52,7 +58,7 @@
                     <!-- <pre id="contenido-archivo"></pre> -->
                     <!-- <form action="#"> -->
                         <!-- <label for="lang">Apis</label> -->
-                        <!-- <select name="lenguajes" id="lang"> -->
+                        <!-- <select name="lenguajes" id="lang" > -->
                             <!-- <option value="javascript">JavaScript</option> -->
                             <!-- <option value="php">PHP</option> -->
                             <!-- <option value="java">Java</option> -->
@@ -74,11 +80,12 @@
                 </div>
                 <div class="Inputs2" id="Api">
                     <p class="P1">API KEY: </p>
-                    <!-- <div class="tooltip"> -->
-                        <input type="text" name="api" id="DivAkey" class="text2" onmouseover="Titulos()" style="visibility: collapse; display: none;">
+                    <div class="tooltip">
+                        <input type="text" name="api" id="DivAkey" multiple class="text2" onmouseover="Titulos()" style="visibility: collapse; display: none;">
                         <textarea name="text" id="DivAkey2" class="text2" rows="1" cols="10" wrap="hard" onmouseover="Titulos()" style="overflow: hidden; resize: none;" onkeyup="tiempo()" > </textarea>
+                        <!-- <input type="search" class="text2" id="search" onkeyup="getValue2(this.value, this.id)">   -->
                         <!-- <span class="tooltiptext">Ingrese la API-KEY del servicio a utilizar!</span> -->
-                    <!-- </div> -->
+                    </div>
                 </div>
             </div>
         </div>
@@ -89,7 +96,7 @@
                     <!-- <div class="tooltip"> -->
                         <input type="text" name="divBase" id="DivBase" maxlength="3" class="text" oninput="SetFocus(this.id)" title="" onmouseover="Titulos()" onkeyup="getValue(this.value, this.id)" >
                         <!-- <ul class="sugerencias"></ul> -->
-                        <div class="output"></div>
+                        <!-- <div class="output"></div> -->
                         <!-- <span class="tooltiptext">Ingrese la Divisa Base que desea Convertir!</span> -->
                     <!-- </div> -->
                 </div>
@@ -103,7 +110,7 @@
                 <div class="Inputs">
                     <p class="P">Cantidad: </p>
                     <!-- <div class="tooltip"> -->
-                        <input type="number" name="divCant" id="DivCant"  class="text3" onKeyPress="if(this.value.length==7) return false; Javascript: if (event.keyCode==13) Convertir(), hideKeyboard();" onfocus="Mayus()" title="" onmouseover="Titulos()">
+                        <input type="number" name="divCant" id="DivCant"  class="text3" onKeyPress="if(this.value.length==10) return false; Javascript: if (event.keyCode==13) Convertir(), hideKeyboard();" onfocus="Mayus()" title="" onmouseover="Titulos()">
                         <!-- <span class="tooltiptext">Ingrese la Cantidad a Convertir!</span> -->
                     <!-- </div> -->
                 </div>
@@ -146,6 +153,7 @@
     </div>
     <!-- <script type="text/javascript" src="script.js"></script> -->
     <script src="script.js"></script>
+    <script src="script2.js"></script>
     <!-- <script src="script-ofuscado.js"></script> -->
     <!-- <script type="module" src="script.js"></script> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
